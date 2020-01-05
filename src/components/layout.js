@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Link from "gatsby-link";
 import { graphql } from "gatsby";
 import PropTypes from "prop-types";
-import Header from "../components/Header";
+import Header from "./components/Header";
 import Helmet from "react-helmet";
 import { getCurrentLangKey, getLangs, getUrlForLang } from "ptz-i18n";
 import { IntlProvider, addLocaleData } from "react-intl";
