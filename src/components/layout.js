@@ -1,52 +1,68 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
+import React, { Component } from "react";
+import Link from "gatsby-link";
+import { graphql } from "gatsby";
+import PropTypes from "prop-types";
+import Header from "../components/Header";
+import Helmet from "react-helmet";
+import { getCurrentLangKey, getLangs, getUrlForLang } from "ptz-i18n";
+import { IntlProvider, addLocaleData } from "react-intl";
+import { rhythm } from "../utils/typography";
+import "intl";
 
-import React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import en from "react-intl/locale-data/en";
+import "intl/locale-data/jsonp/en";
+import uk from "react-intl/locale-data/uk";
+import "intl/locale-data/jsonp/uk";
 
-import Header from "./header"
-import "./layout.css"
+// add concatenated locale data
+addLocaleData([...en, ...uk]);
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
+class TemplateWrapper extends Component {
+  constructor(props) {
+    super(props);
+    this.children = this.props.children;
+    const data = this.props.data;
+    const location = this.props.location;
+    const url = location.pathname;
+    const { langs, defaultLangKey } = data.site.siteMetadata.languages;
+    this.langKey = getCurrentLangKey(langs, defaultLangKey, url);
+    this.homeLink = `/${this.langKey}/`;
+    this.langsMenu = getLangs(
+      langs,
+      this.langKey,
+      getUrlForLang(this.homeLink, url)
+    );
 
-  return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0px 1.0875rem 1.45rem`,
-          paddingTop: 0,
-        }}
-      >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
-    </>
-  )
+    // get the appropriate message file based on langKey
+    // at the moment this assumes that langKey will provide us
+    // with the appropriate language code
+    this.i18nMessages = require(`../data/messages/${this.langKey}`);
+  }
+  render() {
+    return (
+      <IntlProvider locale={this.langKey} messages={this.i18nMessages}>
+        <div>
+          <Helmet
+            title="Gatsby Default Starter"
+            meta={[
+              { name: "description", content: "Sample" },
+              { name: "keywords", content: "sample, something" }
+            ]}
+          />
+          <Header langs={this.langsMenu} />
+          <div>
+            <Link to="/">
+              <h3 style={{ color: `tomato`, marginBottom: rhythm(1.5) }}>
+                Example of using Contentful as a data source for a Gatsby site
+              </h3>
+            </Link>
+            {this.children}
+            <hr style={{ marginTop: rhythm(3) }} />
+          </div>
+        </div>
+      </IntlProvider>
+    );
+  }
 }
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
-
-export default Layout
+export default TemplateWrapper;
