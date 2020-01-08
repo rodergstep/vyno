@@ -6,7 +6,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import SelectLanguage from "./electLanguage";
+import SelectLanguage from "./selectLanguage";
 import srcMainLogo from "../images/main-logo.png";
 
 const drawerWidth = 240;
