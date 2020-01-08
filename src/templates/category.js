@@ -22,7 +22,7 @@ class CategoryTemplate extends React.Component {
         <div>
           <h1>{title}</h1>
           <div>
-            <span>Products</span>
+            <span>paints</span>
             {/* <ul>
               {methods &&
                 methods.map((p, i) => (

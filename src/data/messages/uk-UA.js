@@ -1,4 +1,8 @@
 module.exports = {
   selectLanguage: "Ви обрали українську",
-  price: "Ціна"
+  paintSize: "Розмір",
+  paintYear: "Рік",
+  paintMethod: "Техніка",
+  loadMore: "Завантажити ще",
+  backlink: "Повернутись"
 };

@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import Link from "gatsby-link";
 import { graphql } from "gatsby";
-import PropTypes from "prop-types";
-import Header from "./header";
+import Structure from "./structure";
 import Helmet from "react-helmet";
 import { getCurrentLangKey, getLangs, getUrlForLang } from "ptz-i18n";
 import { IntlProvider, addLocaleData } from "react-intl";
@@ -20,7 +19,6 @@ addLocaleData([...en, ...uk]);
 class TemplateWrapper extends Component {
   constructor(props) {
     super(props);
-    this.children = this.props.children;
     const data = this.props.data;
     const location = this.props.location;
     const url = location.pathname;
@@ -43,22 +41,13 @@ class TemplateWrapper extends Component {
       <IntlProvider locale={this.langKey} messages={this.i18nMessages}>
         <div>
           <Helmet
-            title="Gatsby Default Starter"
+            title="Viktor Vynogradov"
             meta={[
-              { name: "description", content: "Sample" },
-              { name: "keywords", content: "sample, something" }
+              { name: "description", content: "Viktor Vynogradov" },
+              { name: "keywords", content: "Viktor Vynogradov" }
             ]}
           />
-          <Header langs={this.langsMenu} />
-          <div>
-            <Link to="/">
-              <h3 style={{ color: `tomato`, marginBottom: rhythm(1.5) }}>
-                Example of using Contentful as a data source for a Gatsby site
-              </h3>
-            </Link>
-            {this.children}
-            <hr style={{ marginTop: rhythm(3) }} />
-          </div>
+          <Structure langs={this.langsMenu}>{this.props.children}</Structure>
         </div>
       </IntlProvider>
     );
