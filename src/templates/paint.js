@@ -1,20 +1,20 @@
-import React from "react";
-import * as PropTypes from "prop-types";
-import Grid from "@material-ui/core/Grid";
-import { Link, graphql } from "gatsby";
-import Img from "gatsby-image";
-import { FormattedMessage } from "react-intl";
-import ChevronLeftRoundedIcon from "@material-ui/icons/ChevronLeftRounded";
-import Layout from "../components/layout";
+import React from "react"
+import * as PropTypes from "prop-types"
+import Grid from "@material-ui/core/Grid"
+import { Link, graphql } from "gatsby"
+import Img from "gatsby-image"
+import { FormattedMessage } from "react-intl"
+import ChevronLeftRoundedIcon from "@material-ui/icons/ChevronLeftRounded"
+import Layout from "../components/layout"
 
 const propTypes = {
-  data: PropTypes.object.isRequired
-};
+  data: PropTypes.object.isRequired,
+}
 
 class PaintTemplate extends React.Component {
   render() {
-    const paint = this.props.data.contentfulPainting;
-    const { title, year, image, size, description, method } = paint;
+    const paint = this.props.data.contentfulPainting
+    const { title, year, image, size, description, method } = paint
     return (
       <Layout data={this.props.data} location={this.props.location}>
         <div>
@@ -49,7 +49,7 @@ class PaintTemplate extends React.Component {
                 <div
                   className="paint__descr"
                   dangerouslySetInnerHTML={{
-                    __html: description.childMarkdownRemark.html
+                    __html: description.childMarkdownRemark.html,
                   }}
                 />
               )}
@@ -57,13 +57,13 @@ class PaintTemplate extends React.Component {
           </Grid>
         </div>
       </Layout>
-    );
+    )
   }
 }
 
-PaintTemplate.propTypes = propTypes;
+PaintTemplate.propTypes = propTypes
 
-export default PaintTemplate;
+export default PaintTemplate
 
 export const pageQuery = graphql`
   query paintQuery($id: String!) {
@@ -89,10 +89,10 @@ export const pageQuery = graphql`
       image {
         contentful_id
         title
-        fluid(maxWidth: 1000, quality: 90) {
+        fluid(maxWidth: 1000, quality: 70) {
           ...GatsbyContentfulFluid
         }
       }
     }
   }
-`;
+`

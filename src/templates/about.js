@@ -1,22 +1,22 @@
-import React from "react";
-import { graphql } from "gatsby";
-import Img from "gatsby-image";
-import Grid from "@material-ui/core/Grid";
-import Layout from "../components/layout";
+import React from "react"
+import { graphql } from "gatsby"
+import Img from "gatsby-image"
+import Grid from "@material-ui/core/Grid"
+import Layout from "../components/layout"
 
 class AboutPage extends React.Component {
   constructor() {
-    super();
+    super()
   }
 
   render() {
-    let aboutEdges = this.props.data.about.edges;
+    let aboutEdges = this.props.data.about.edges
     return (
       <Layout data={this.props.data} location={this.props.location}>
         <div>
           {aboutEdges.map((node, i) => {
-            console.log(node);
-            const { title, image, contentful_id, description } = node.node;
+            console.log(node)
+            const { title, image, contentful_id, description } = node.node
             return (
               <Grid key={i} container spacing={3}>
                 <Grid item xs={12} lg={6}>
@@ -28,21 +28,21 @@ class AboutPage extends React.Component {
                     <div
                       className="paint__descr"
                       dangerouslySetInnerHTML={{
-                        __html: description.childMarkdownRemark.html
+                        __html: description.childMarkdownRemark.html,
                       }}
                     />
                   )}
                 </Grid>
               </Grid>
-            );
+            )
           })}
         </div>
       </Layout>
-    );
+    )
   }
 }
 
-export default AboutPage;
+export default AboutPage
 
 export const pageQuery = graphql`
   query PageAboutQuery($lang: String!) {
@@ -62,7 +62,7 @@ export const pageQuery = graphql`
           image {
             contentful_id
             title
-            fluid(maxWidth: 1000, quality: 90) {
+            fluid(maxWidth: 1000, quality: 70) {
               ...GatsbyContentfulFluid
             }
           }
@@ -75,4 +75,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`

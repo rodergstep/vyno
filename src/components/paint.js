@@ -1,31 +1,31 @@
-import React from "react";
-import { Link, graphql } from "gatsby";
-import Img from "gatsby-image";
+import React from "react"
+import { Link, graphql } from "gatsby"
+import Img from "gatsby-image"
 
-let touched = false;
+let touched = false
 
 class Paint extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
-      hovering: false
-    };
+      hovering: false,
+    }
   }
 
   render() {
-    const { image, title, slug, node_locale } = this.props.post;
+    const { image, title, slug, node_locale } = this.props.post
     return (
       <Link
         to={`/${node_locale}/paints/${slug}/`}
         onTouchStart={() => (touched = true)}
         onMouseEnter={() => {
           if (!touched) {
-            this.setState({ hovering: true });
+            this.setState({ hovering: true })
           }
         }}
         onMouseLeave={() => {
           if (!touched) {
-            this.setState({ hovering: false });
+            this.setState({ hovering: false })
           }
         }}
       >
@@ -36,11 +36,11 @@ class Paint extends React.Component {
           <figcaption className="figure__title">{title}</figcaption>
         </figure>
       </Link>
-    );
+    )
   }
 }
 
-export default Paint;
+export default Paint
 
 export const postFragment = graphql`
   fragment Painting on ContentfulPainting {
@@ -52,9 +52,9 @@ export const postFragment = graphql`
     updatedAt(formatString: "")
     image {
       title
-      fluid(maxWidth: 1000, quality: 90) {
-        ...GatsbyContentfulFluid
+      fluid(maxWidth: 1000, quality: 70) {
+        ...GatsbyContentfulFluid_withWebp
       }
     }
   }
-`;
+`
