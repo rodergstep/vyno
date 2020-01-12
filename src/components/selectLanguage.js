@@ -1,26 +1,26 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Link from "gatsby-link";
+import React from "react"
+import PropTypes from "prop-types"
+import AniLink from "gatsby-plugin-transition-link/AniLink"
 
 const SelectLanguage = props => {
   return (
     <div className="swith-language">
       {props.langs.map((lang, i) => (
-        <Link to={lang.link} key={lang.langKey} selected={lang.selected}>
+        <AniLink to={lang.link} key={lang.langKey} selected={lang.selected}>
           {lang.langKey == "uk-UA"
             ? "укр"
             : lang.langKey == "en-US"
             ? "eng"
             : lang.langKey}
           {i !== props.langs.length - 1 ? <span>/</span> : null}
-        </Link>
+        </AniLink>
       ))}
     </div>
-  );
-};
+  )
+}
 
 SelectLanguage.propTypes = {
-  langs: PropTypes.array
-};
+  langs: PropTypes.array,
+}
 
-export default SelectLanguage;
+export default SelectLanguage

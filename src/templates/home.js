@@ -1,64 +1,65 @@
-import React from "react";
-import { graphql } from "gatsby";
-import Grid from "@material-ui/core/Grid";
-import chunk from "lodash/chunk";
-import Layout from "../components/layout";
-import Paint from "../components/paint";
-import Button from "@material-ui/core/Button";
-import { FormattedMessage } from "react-intl";
+import React from "react"
+import { graphql } from "gatsby"
+import Grid from "@material-ui/core/Grid"
+import chunk from "lodash/chunk"
+import Layout from "../components/layout"
+import Paint from "../components/paint"
+import Button from "@material-ui/core/Button"
+import { FormattedMessage } from "react-intl"
 
 // This would normally be in a Redux store or some other global data store.
 if (typeof window !== `undefined`) {
-  window.postsToShow = 4;
+  window.postsToShow = 4
 }
 
 class HomePage extends React.Component {
   constructor() {
-    super();
-    let postsToShow = 4;
+    super()
+    let postsToShow = 4
     if (typeof window !== `undefined`) {
-      postsToShow = window.postsToShow;
+      postsToShow = window.postsToShow
     }
 
     this.state = {
       showingMore: postsToShow > 4,
-      postsToShow
-    };
+      postsToShow,
+    }
   }
+
   update() {
     const distanceToBottom =
       document.documentElement.offsetHeight -
-      (window.scrollY + window.innerHeight);
+      (window.scrollY + window.innerHeight)
     if (this.state.showingMore && distanceToBottom < 100) {
-      this.setState({ postsToShow: this.state.postsToShow + 4 });
+      this.setState({ postsToShow: this.state.postsToShow + 4 })
     }
-    this.ticking = false;
+    this.ticking = false
   }
   loadMorePosts = () => {
     this.setState({
       postsToShow: this.state.postsToShow + 4,
-      showingMore: true
-    });
-  };
+      showingMore: true,
+    })
+  }
   handleScroll = () => {
     if (!this.ticking) {
-      this.ticking = true;
-      requestAnimationFrame(() => this.update());
+      this.ticking = true
+      requestAnimationFrame(() => this.update())
     }
-  };
+  }
 
   componentDidMount() {
-    window.addEventListener(`scroll`, this.handleScroll);
+    window.addEventListener(`scroll`, this.handleScroll)
   }
 
   componentWillUnmount() {
-    window.removeEventListener(`scroll`, this.handleScroll);
-    window.postsToShow = this.state.postsToShow;
+    window.removeEventListener(`scroll`, this.handleScroll)
+    window.postsToShow = this.state.postsToShow
   }
 
   render() {
-    let homePaintEdges = this.props.data.home.edges;
-    const posts = homePaintEdges.map(e => e.node);
+    let homePaintEdges = this.props.data.home.edges
+    const posts = homePaintEdges.map(e => e.node)
     return (
       <Layout data={this.props.data} location={this.props.location}>
         <div>
@@ -69,7 +70,7 @@ class HomePage extends React.Component {
                   <Grid key={node.id} item xs={12} md={6}>
                     <Paint post={node} key={node.id} />
                   </Grid>
-                );
+                )
               })}
             </Grid>
           ))}
@@ -86,11 +87,11 @@ class HomePage extends React.Component {
           )}
         </div>
       </Layout>
-    );
+    )
   }
 }
 
-export default HomePage;
+export default HomePage
 
 export const pageQuery = graphql`
   query PageHomeQuery($lang: String!) {
@@ -111,4 +112,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`

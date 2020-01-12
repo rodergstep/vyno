@@ -1,6 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import Img from "gatsby-image"
+import AniLink from "gatsby-plugin-transition-link/AniLink"
 
 let touched = false
 
@@ -15,19 +16,11 @@ class Paint extends React.Component {
   render() {
     const { image, title, slug, node_locale } = this.props.post
     return (
-      <Link
+      <AniLink
+        cover
+        bg="linear-gradient(to right, #757f9a, #d7dde8)"
+        direction="right"
         to={`/${node_locale}/paints/${slug}/`}
-        onTouchStart={() => (touched = true)}
-        onMouseEnter={() => {
-          if (!touched) {
-            this.setState({ hovering: true })
-          }
-        }}
-        onMouseLeave={() => {
-          if (!touched) {
-            this.setState({ hovering: false })
-          }
-        }}
       >
         <figure className="figure">
           {image && (
@@ -35,7 +28,7 @@ class Paint extends React.Component {
           )}
           <figcaption className="figure__title">{title}</figcaption>
         </figure>
-      </Link>
+      </AniLink>
     )
   }
 }
