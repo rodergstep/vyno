@@ -7,7 +7,7 @@ import MenuIcon from "@material-ui/icons/Menu"
 import FacebookIcon from "@material-ui/icons/Facebook"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import SelectLanguage from "./selectLanguage"
-import srcMainLogo from "../images/main-logo.png"
+import srcMainLogo from "../images/main-logo.jpg"
 
 const drawerWidth = 240
 
@@ -60,7 +60,7 @@ function ResponsiveDrawer(props) {
         ]
   const drawer = langs => {
     return (
-      <div>
+      <div className="drawer">
         <IconButton
           color="inherit"
           aria-label="open drawer"

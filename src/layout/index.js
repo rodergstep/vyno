@@ -22,7 +22,6 @@ export default props => (
       }
     `}
     render={data => {
-      console.log(data)
       const location = props.location
       const url = location.pathname
       const { langs, defaultLangKey } = data.site.siteMetadata.languages

@@ -19,11 +19,13 @@ a {
   align-items: center;
 }
 .main-logo {
-  max-width: 100px;
+  max-width: 192px;
+}
+.drawer {
+  padding: 24px 24px;
 }
 .nav {
-  padding-left: 32px;
-  text-transform: uppercase;
+  margin-top: 24px;
   font-weight: 400;
 }
 .nav__list {
@@ -35,7 +37,6 @@ a {
   margin-top: 32px;
   font-size: 14px;
   font-weight: 400px;
-  text-transform: uppercase;
   a[aria-current="page"] {
     font-weight: 700;
   }
