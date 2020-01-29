@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { Component, useState } from "react"
 import { StaticQuery, graphql } from "gatsby"
 import { AppProvider } from "../utils/context"
 import Structure from "../components/structure"
@@ -22,6 +22,8 @@ export default props => (
       }
     `}
     render={data => {
+      const [shouldLoaderShow, handleLoaderShow] = useState(false)
+
       const location = props.location
       const url = location.pathname
       const { langs, defaultLangKey } = data.site.siteMetadata.languages
@@ -33,10 +35,15 @@ export default props => (
       // at the moment this assumes that langKey will provide us
       // with the appropriate language code
       const i18nMessages = require(`../data/messages/${langKey}`)
-      const contextData = { locale: langKey }
+      const contextData = {
+        locale: langKey,
+        langsMenu: langsMenu,
+        shouldLoaderShow: shouldLoaderShow,
+        handleLoaderShow: e => handleLoaderShow(e),
+      }
       return (
         <AppProvider value={contextData}>
-          <IntlProvider locale={langKey} messages={i18nMessages} theme="red">
+          <IntlProvider locale={langKey} messages={i18nMessages}>
             <Helmet
               title="Viktor Vynogradov"
               meta={[
@@ -44,9 +51,7 @@ export default props => (
                 { name: "keywords", content: "Viktor Vynogradov" },
               ]}
             />
-            <Structure langs={langsMenu} locale={langKey}>
-              {props.children}
-            </Structure>
+            {props.children}
           </IntlProvider>
         </AppProvider>
       )

@@ -5,14 +5,14 @@ import AniLink from "gatsby-plugin-transition-link/AniLink"
 import Img from "gatsby-image"
 import { FormattedMessage, useIntl } from "react-intl"
 import ChevronLeftRoundedIcon from "@material-ui/icons/ChevronLeftRounded"
-import Layout from "../components/layout"
+import Structure from "../components/structure"
 import { AppConsumer } from "../utils/context"
 
 const PaintTemplate = props => {
   const paint = props.data.contentfulPainting
   const { title, year, image, size, description, method } = paint
   return (
-    <Layout data={props.data} location={props.location}>
+    <Structure data={props.data} location={props.location}>
       <AppConsumer>
         {contextData => {
           return (
@@ -62,7 +62,7 @@ const PaintTemplate = props => {
           )
         }}
       </AppConsumer>
-    </Layout>
+    </Structure>
   )
 }
 

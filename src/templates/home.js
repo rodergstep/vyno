@@ -1,92 +1,128 @@
 import React from "react"
 import { graphql } from "gatsby"
-import Grid from "@material-ui/core/Grid"
-import chunk from "lodash/chunk"
-import Layout from "../components/layout"
-import Paint from "../components/paint"
-import Button from "@material-ui/core/Button"
-import { FormattedMessage } from "react-intl"
-
-// This would normally be in a Redux store or some other global data store.
-if (typeof window !== `undefined`) {
-  window.postsToShow = 4
-}
+import { TweenLite, TimelineLite, Power1 } from "gsap"
+import { AppConsumer } from "../utils/context"
+import Img from "gatsby-image"
+import Structure from "../components/structure"
+import Tilt from "../components/tilt"
 
 class HomePage extends React.Component {
   constructor() {
     super()
-    let postsToShow = 4
-    if (typeof window !== `undefined`) {
-      postsToShow = window.postsToShow
-    }
 
     this.state = {
-      showingMore: postsToShow > 4,
-      postsToShow,
+      pageclass: "page-home",
     }
-  }
 
-  update() {
-    const distanceToBottom =
-      document.documentElement.offsetHeight -
-      (window.scrollY + window.innerHeight)
-    if (this.state.showingMore && distanceToBottom < 100) {
-      this.setState({ postsToShow: this.state.postsToShow + 4 })
-    }
-    this.ticking = false
-  }
-  loadMorePosts = () => {
-    this.setState({
-      postsToShow: this.state.postsToShow + 4,
-      showingMore: true,
-    })
-  }
-  handleScroll = () => {
-    if (!this.ticking) {
-      this.ticking = true
-      requestAnimationFrame(() => this.update())
-    }
+    this.transitionCover = null
+    this.transitionTitle = null
+    this.myTween = new TimelineLite()
   }
 
   componentDidMount() {
-    window.addEventListener(`scroll`, this.handleScroll)
+    this.anime()
   }
 
-  componentWillUnmount() {
-    window.removeEventListener(`scroll`, this.handleScroll)
-    window.postsToShow = this.state.postsToShow
+  anime = () => {
+    this.myTween
+      .to(this.transitionCover, 0.6, {
+        y: "-100%",
+        delay: 0.6,
+        ease: Power1.easeInOut,
+      })
+      .to(this.transitionTitle, 0.3, {
+        y: "-5vw",
+        opacity: 1,
+        delay: -0.2,
+        ease: Power1.easeInOut,
+      })
+      .play()
   }
 
   render() {
     let homePaintEdges = this.props.data.home.edges
     const posts = homePaintEdges.map(e => e.node)
     return (
-      <Layout data={this.props.data} location={this.props.location}>
-        <div>
-          {chunk(posts.slice(0, this.state.postsToShow), 2).map((chunk, i) => (
-            <Grid container spacing={2} key={`chunk-${i}`}>
-              {chunk.map(node => {
-                return (
-                  <Grid key={node.id} item xs={12} md={6}>
-                    <Paint post={node} key={node.id} />
-                  </Grid>
-                )
-              })}
-            </Grid>
-          ))}
-          {!this.state.showingMore && (
-            <div className="btn-load-more">
-              <Button
-                variant="outlined"
-                color="secondary"
-                onClick={this.loadMorePosts}
+      <AppConsumer>
+        {context => {
+          context.handleLoaderShow(true)
+          return (
+            <Structure
+              data={this.props.data}
+              location={this.props.location}
+              pageclass="page-home"
+            >
+              <Tilt>
+                <div className="room room--current">
+                  <div className="room__side room__side--back">
+                    <Img
+                      fluid={[{ ...posts[0].image.fluid }]}
+                      fadeIn
+                      className="room__img"
+                    />
+                    <Img
+                      fluid={[{ ...posts[1].image.fluid }]}
+                      fadeIn
+                      className="room__img"
+                    />
+                  </div>
+                  <div className="room__side room__side--left">
+                    <Img
+                      fluid={[{ ...posts[2].image.fluid }]}
+                      fadeIn
+                      className="room__img"
+                    />
+                    <Img
+                      fluid={[{ ...posts[3].image.fluid }]}
+                      fadeIn
+                      className="room__img"
+                    />
+                    <Img
+                      fluid={[{ ...posts[4].image.fluid }]}
+                      fadeIn
+                      className="room__img"
+                    />
+                  </div>
+                  <div className="room__side room__side--right">
+                    <Img
+                      fluid={[{ ...posts[5].image.fluid }]}
+                      fadeIn
+                      className="room__img"
+                    />
+                    <Img
+                      fluid={[{ ...posts[6].image.fluid }]}
+                      fadeIn
+                      className="room__img"
+                    />
+                    <Img
+                      fluid={[{ ...posts[7].image.fluid }]}
+                      fadeIn
+                      className="room__img"
+                    />
+                  </div>
+                  <div className="room__side room__side--bottom"></div>
+                </div>
+              </Tilt>
+              <h1 className="hero__title" ref={n => (this.transitionTitle = n)}>
+                Victor
+                <br />
+                Vynogradov
+              </h1>
+              <div
+                className={`overlay overlay--loader  ${context.shouldLoaderShow &&
+                  "overlay--active"}`}
+                ref={n => (this.transitionCover = n)}
               >
-                <FormattedMessage id="loadMore" />
-              </Button>{" "}
-            </div>
-          )}
-        </div>
-      </Layout>
+                <div className="loader">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>
+            </Structure>
+          )
+        }}
+      </AppConsumer>
     )
   }
 }

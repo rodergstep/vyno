@@ -2,7 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import Grid from "@material-ui/core/Grid"
-import Layout from "../components/layout"
+import Structure from "../components/structure"
 
 class AboutPage extends React.Component {
   constructor() {
@@ -12,15 +12,20 @@ class AboutPage extends React.Component {
   render() {
     let aboutEdges = this.props.data.about.edges
     return (
-      <Layout data={this.props.data} location={this.props.location}>
+      <Structure data={this.props.data} location={this.props.location}>
         <div>
           {aboutEdges.map((node, i) => {
-            console.log(node)
             const { title, image, contentful_id, description } = node.node
             return (
               <Grid key={i} container spacing={3}>
                 <Grid item xs={12} lg={6}>
-                  {image && <Img fluid={[{ ...image.fluid }]} fadeIn />}
+                  {image && (
+                    <Img
+                      fluid={[{ ...image.fluid }]}
+                      className="about__person"
+                      fadeIn
+                    />
+                  )}
                 </Grid>
                 <Grid item xs={12} lg={6}>
                   <h1 className="paint__title">{title}</h1>
@@ -37,7 +42,7 @@ class AboutPage extends React.Component {
             )
           })}
         </div>
-      </Layout>
+      </Structure>
     )
   }
 }
