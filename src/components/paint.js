@@ -16,12 +16,7 @@ class Paint extends React.Component {
   render() {
     const { image, title, slug, node_locale } = this.props.post
     return (
-      <AniLink
-        cover
-        bg="linear-gradient(to right, #757f9a, #d7dde8)"
-        direction="right"
-        to={`/${node_locale}/paints/${slug}/`}
-      >
+      <AniLink fade to={`/${node_locale}/paints/${slug}/`}>
         <figure className="figure">
           {image && (
             <Img fluid={[{ ...image.fluid }]} fadeIn className="figure__pic" />
@@ -43,6 +38,9 @@ export const postFragment = graphql`
     slug
     year
     updatedAt(formatString: "")
+    method {
+      name
+    }
     image {
       title
       fluid(maxWidth: 1000, quality: 70) {

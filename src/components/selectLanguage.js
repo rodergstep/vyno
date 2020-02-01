@@ -3,7 +3,6 @@ import PropTypes from "prop-types"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
 
 const SelectLanguage = props => {
-  console.log(props)
   return (
     <div className="swith-language">
       {props.langs.map((lang, i) => (

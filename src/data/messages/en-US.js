@@ -4,5 +4,9 @@ module.exports = {
   paintYear: "Year",
   paintMethod: "Method",
   loadMore: "Load more",
-  backlink: "Back"
-};
+  backlink: "Back",
+  filterValueAll: "all",
+  filterFrom: "from",
+  authorName: "Viktor",
+  authorSurame: "Vynogradov",
+}

@@ -3,9 +3,9 @@ import { graphql } from "gatsby"
 import { AppConsumer } from "../utils/context"
 import Grid from "@material-ui/core/Grid"
 import chunk from "lodash/chunk"
+import filter from "lodash/filter"
 import Structure from "../components/structure"
 import Paint from "../components/paint"
-import Button from "@material-ui/core/Button"
 import { FormattedMessage } from "react-intl"
 
 // This would normally be in a Redux store or some other global data store.
@@ -22,6 +22,9 @@ class GalleryPage extends React.Component {
     }
 
     this.state = {
+      posts: [],
+      filteredPosts: [],
+      filteredValue: "all",
       showingMore: postsToShow > 4,
       postsToShow,
     }
@@ -51,6 +54,12 @@ class GalleryPage extends React.Component {
 
   componentDidMount() {
     window.addEventListener(`scroll`, this.handleScroll)
+    const posts = this.props.data.home.edges.map(e => e.node)
+    console.log("compdm")
+    this.setState(state => ({
+      posts: posts,
+      filteredPosts: state.filteredValue === "all" ? posts : state.filterPosts,
+    }))
   }
 
   componentWillUnmount() {
@@ -58,37 +67,82 @@ class GalleryPage extends React.Component {
     window.postsToShow = this.state.postsToShow
   }
 
+  filterPosts = filteredValue => {
+    if (filteredValue === "all") {
+      this.setState(state => ({ filteredPosts: state.posts, filteredValue }))
+    } else {
+      const filteredPosts = filter(this.state.posts, function(o) {
+        return o.method && o.method.name === filteredValue
+      })
+      this.setState(state => ({ filteredPosts, filteredValue }))
+    }
+  }
+
   render() {
-    let homePaintEdges = this.props.data.home.edges
-    const posts = homePaintEdges.map(e => e.node)
+    let methods = this.props.data.methods.edges
+    const filteredPosts = this.state.filteredPosts
     return (
       <AppConsumer>
         {context => {
           return (
             <Structure data={this.props.data} location={this.props.location}>
-              <div>
-                {chunk(posts.slice(0, this.state.postsToShow), 2).map(
-                  (chunk, i) => (
-                    <Grid container spacing={2} key={`chunk-${i}`}>
-                      {chunk.map(node => {
-                        return (
-                          <Grid key={node.id} item xs={12} md={6}>
-                            <Paint post={node} key={node.id} />
-                          </Grid>
-                        )
-                      })}
-                    </Grid>
+              <div className="container">
+                <div className="filter">
+                  <ul className="filter__list">
+                    <li
+                      className={`filter__list-item ${
+                        this.state.filteredValue === "all" ? "is-active" : ""
+                      }`}
+                      onClick={() => this.filterPosts("all")}
+                    >
+                      <FormattedMessage id="filterValueAll" />
+                    </li>
+                    {methods.length &&
+                      methods.map(m => (
+                        <li
+                          className={`filter__list-item ${
+                            m.node.name === this.state.filteredValue
+                              ? "is-active"
+                              : ""
+                          }`}
+                          key={m.node.id}
+                          onClick={() => this.filterPosts(m.node.name)}
+                        >
+                          {m.node.name}
+                        </li>
+                      ))}
+                  </ul>
+                  <div className="fiter__total">
+                    {filteredPosts.length} <FormattedMessage id="filterFrom" />{" "}
+                    {this.state.posts.length}
+                  </div>
+                </div>
+
+                {filteredPosts.length ? (
+                  chunk(filteredPosts.slice(0, this.state.postsToShow), 2).map(
+                    (chunk, i) => (
+                      <Grid container spacing={2} key={`chunk-${i}`}>
+                        {chunk.map(node => {
+                          return (
+                            <Grid key={node.id} item xs={12} md={6}>
+                              <Paint post={node} key={node.id} />
+                            </Grid>
+                          )
+                        })}
+                      </Grid>
+                    )
                   )
+                ) : (
+                  <span>Картини у цю категорію іще не були додані</span>
                 )}
-                {!this.state.showingMore && (
+                {!this.state.showingMore && filteredPosts.length > 4 && (
                   <div className="btn-load-more">
-                    <Button
-                      variant="outlined"
-                      color="secondary"
+                    <button
+                      className="btn secondary"
                       onClick={this.loadMorePosts}
                     >
                       <FormattedMessage id="loadMore" />
-                    </Button>{" "}
+                    </button>
                   </div>
                 )}
               </div>
@@ -117,6 +171,14 @@ export const pageQuery = graphql`
         node {
           id
           ...Painting
+        }
+      }
+    }
+    methods: allContentfulMethod(filter: { node_locale: { eq: $lang } }) {
+      edges {
+        node {
+          id
+          name
         }
       }
     }

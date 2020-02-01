@@ -16,49 +16,49 @@ const PaintTemplate = props => {
       <AppConsumer>
         {contextData => {
           return (
-            <Grid container spacing={3}>
-              <Grid item xs={12} lg={8}>
-                {image && <Img fluid={[{ ...image.fluid }]} fadeIn />}
+            <div className="container" style={{ marginTop: "24px" }}>
+              <Grid container spacing={3}>
+                <Grid item xs={12} lg={8}>
+                  {image && <Img fluid={[{ ...image.fluid }]} fadeIn />}
+                </Grid>
+                <Grid item xs={12} lg={4}>
+                  <AniLink
+                    fade
+                    to={`/${contextData.locale}/gallery`}
+                    className="backlink d-flex align-center"
+                  >
+                    <ChevronLeftRoundedIcon />
+                    <FormattedMessage id="backlink" />
+                  </AniLink>
+                  <h1 className="paint__title">{title}</h1>
+                  <div className="paint__info">
+                    {size && (
+                      <span>
+                        <FormattedMessage id="paintSize" />: {size}
+                      </span>
+                    )}
+                    {method && (
+                      <span>
+                        <FormattedMessage id="paintMethod" />: {method}
+                      </span>
+                    )}
+                    {year && (
+                      <span>
+                        <FormattedMessage id="paintYear" />: {year}
+                      </span>
+                    )}
+                  </div>
+                  {description && (
+                    <div
+                      className="paint__descr"
+                      dangerouslySetInnerHTML={{
+                        __html: description.childMarkdownRemark.html,
+                      }}
+                    />
+                  )}
+                </Grid>
               </Grid>
-              <Grid item xs={12} lg={4}>
-                <AniLink
-                  cover
-                  bg="linear-gradient(to right, #757f9a, #d7dde8)"
-                  direction="left"
-                  to={`/${contextData.locale}/`}
-                  className="backlink d-flex align-center"
-                >
-                  <ChevronLeftRoundedIcon />
-                  <FormattedMessage id="backlink" />
-                </AniLink>
-                <h1 className="paint__title">{title}</h1>
-                <div className="paint__info">
-                  {size && (
-                    <span>
-                      <FormattedMessage id="paintSize" />: {size}
-                    </span>
-                  )}
-                  {year && (
-                    <span>
-                      <FormattedMessage id="paintYear" />: {year}
-                    </span>
-                  )}
-                  {method && (
-                    <span>
-                      <FormattedMessage id="paintMethod" />: {method}
-                    </span>
-                  )}
-                </div>
-                {description && (
-                  <div
-                    className="paint__descr"
-                    dangerouslySetInnerHTML={{
-                      __html: description.childMarkdownRemark.html,
-                    }}
-                  />
-                )}
-              </Grid>
-            </Grid>
+            </div>
           )
         }}
       </AppConsumer>

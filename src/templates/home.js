@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 import { TweenLite, TimelineLite, Power1 } from "gsap"
 import { AppConsumer } from "../utils/context"
 import Img from "gatsby-image"
+import { FormattedMessage } from "react-intl"
 import Structure from "../components/structure"
 import Tilt from "../components/tilt"
 
@@ -104,9 +105,9 @@ class HomePage extends React.Component {
                 </div>
               </Tilt>
               <h1 className="hero__title" ref={n => (this.transitionTitle = n)}>
-                Victor
+                <FormattedMessage id="authorName" />
                 <br />
-                Vynogradov
+                <FormattedMessage id="authorSurame" />
               </h1>
               <div
                 className={`overlay overlay--loader  ${context.shouldLoaderShow &&

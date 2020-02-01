@@ -77,10 +77,11 @@ exports.createPages = ({ graphql, actions }) => {
           if (result.errors) {
             reject(result.errors)
           }
-          // Create Home page
+          // Creating the pages
           const homeTemplate = path.resolve(`./src/templates/home.js`)
           const galleryTemplate = path.resolve(`./src/templates/gallery.js`)
           const aboutTemplate = path.resolve(`./src/templates/about.js`)
+          const poetryTemplate = path.resolve(`./src/templates/poetry.js`)
           _.each(result.data.site.siteMetadata.languages.langs, lang => {
             createPage({
               path: `/${lang}/`,
@@ -99,6 +100,13 @@ exports.createPages = ({ graphql, actions }) => {
             createPage({
               path: `/${lang}/about/`,
               component: slash(aboutTemplate),
+              context: {
+                lang: `${lang}`,
+              },
+            })
+            createPage({
+              path: `/${lang}/poetry/`,
+              component: slash(poetryTemplate),
               context: {
                 lang: `${lang}`,
               },
