@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react"
 import { TimelineMax, TweenLite, TimelineLite, Power1, Power2 } from "gsap"
+import { FormattedMessage } from "react-intl"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
 import IconButton from "@material-ui/core/IconButton"
 import MenuIcon from "@material-ui/icons/Menu"
@@ -11,24 +12,24 @@ import srcMainLogo from "../images/main-logo.jpg"
 const Structure = props => {
   const langs = props.data.site.siteMetadata.languages.langs
 
-  const Header = (langs, locale) => {
+  const Aside = (langs, locale) => {
     const menu =
       locale === "en-US"
         ? [
             { link: "/en-US/", text: "Main" },
             { link: "/en-US/gallery/", text: "Paints" },
             { link: "/en-US/poetry/", text: "Poetry" },
-            { link: "/en-US/about/", text: "About me" },
+            { link: "/en-US/about/", text: "About author" },
           ]
         : [
             { link: "/uk-UA/", text: "Головна" },
             { link: "/uk-UA/gallery/", text: "Картини" },
             { link: "/uk-UA/poetry/", text: "Поезія" },
-            { link: "/uk-UA/about/", text: "Про мене" },
+            { link: "/uk-UA/about/", text: "Про автора" },
           ]
     return (
-      <header className="header">
-        <div className="header__inner">
+      <aside className="aside">
+        <div className="aside__inner">
           {/* <IconButton
           color="inherit"
           aria-label="open drawer"
@@ -38,13 +39,20 @@ const Structure = props => {
         >
           <MenuIcon />
         </IconButton> */}
-          {/* <AniLink fade to={`/${props.locale}/`}>
-            <img
-              src={srcMainLogo}
-              alt="Viktor Vynogradov"
-              className="main-logo"
-            />
-          </AniLink>*/}
+          <AniLink fade to={`/${locale}/`}>
+            <figure>
+              <img
+                src={srcMainLogo}
+                alt="Viktor Vynogradov"
+                className="main-logo"
+              />
+            </figure>
+            <figcaption className="author">
+              <FormattedMessage id="authorName" />{" "}
+              <FormattedMessage id="authorSurame" />
+            </figcaption>
+          </AniLink>
+
           <div className="nav">
             <ul className="nav__list">
               {menu.map((item, index) => (
@@ -55,24 +63,26 @@ const Structure = props => {
                 </li>
               ))}
             </ul>
-            <SelectLanguage langs={langs} locale={locale} />
-            <a
-              href="https://www.facebook.com/viktor.vynogradov.artist"
-              target="_blank"
-              className="nav__socials"
-            >
-              <svg
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                className="nav__socials-icon"
-                viewBox="0 0 32 32"
+            <div className="aside__footer">
+              <SelectLanguage langs={langs} locale={locale} />
+              <a
+                href="https://www.facebook.com/viktor.vynogradov.artist"
+                target="_blank"
+                className="nav__socials"
               >
-                <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
-              </svg>
-            </a>
+                <svg
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="nav__socials-icon"
+                  viewBox="0 0 32 32"
+                >
+                  <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
-      </header>
+      </aside>
     )
   }
 
@@ -81,7 +91,7 @@ const Structure = props => {
       {context => {
         return (
           <div className={`page-wrap ${props.pageclass}`}>
-            {Header(langs, context.locale)}
+            {Aside(langs, context.locale)}
             <main className="main">{props.children}</main>
           </div>
         )

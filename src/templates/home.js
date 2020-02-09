@@ -2,10 +2,8 @@ import React from "react"
 import { graphql } from "gatsby"
 import { TweenLite, TimelineLite, Power1 } from "gsap"
 import { AppConsumer } from "../utils/context"
-import Img from "gatsby-image"
-import { FormattedMessage } from "react-intl"
+import Image from "../components/image"
 import Structure from "../components/structure"
-import Tilt from "../components/tilt"
 
 class HomePage extends React.Component {
   constructor() {
@@ -16,7 +14,7 @@ class HomePage extends React.Component {
     }
 
     this.transitionCover = null
-    this.transitionTitle = null
+    this.transitionHeroPaint = null
     this.myTween = new TimelineLite()
   }
 
@@ -31,8 +29,7 @@ class HomePage extends React.Component {
         delay: 0.6,
         ease: Power1.easeInOut,
       })
-      .to(this.transitionTitle, 0.3, {
-        y: "-5vw",
+      .to(this.transitionHeroPaint, 0.5, {
         opacity: 1,
         delay: -0.2,
         ease: Power1.easeInOut,
@@ -53,62 +50,12 @@ class HomePage extends React.Component {
               location={this.props.location}
               pageclass="page-home"
             >
-              <Tilt>
-                <div className="room room--current">
-                  <div className="room__side room__side--back">
-                    <Img
-                      fluid={[{ ...posts[0].image.fluid }]}
-                      fadeIn
-                      className="room__img"
-                    />
-                    <Img
-                      fluid={[{ ...posts[1].image.fluid }]}
-                      fadeIn
-                      className="room__img"
-                    />
-                  </div>
-                  <div className="room__side room__side--left">
-                    <Img
-                      fluid={[{ ...posts[2].image.fluid }]}
-                      fadeIn
-                      className="room__img"
-                    />
-                    <Img
-                      fluid={[{ ...posts[3].image.fluid }]}
-                      fadeIn
-                      className="room__img"
-                    />
-                    <Img
-                      fluid={[{ ...posts[4].image.fluid }]}
-                      fadeIn
-                      className="room__img"
-                    />
-                  </div>
-                  <div className="room__side room__side--right">
-                    <Img
-                      fluid={[{ ...posts[5].image.fluid }]}
-                      fadeIn
-                      className="room__img"
-                    />
-                    <Img
-                      fluid={[{ ...posts[6].image.fluid }]}
-                      fadeIn
-                      className="room__img"
-                    />
-                    <Img
-                      fluid={[{ ...posts[7].image.fluid }]}
-                      fadeIn
-                      className="room__img"
-                    />
-                  </div>
-                  <div className="room__side room__side--bottom"></div>
-                </div>
-              </Tilt>
-              <h1 className="hero__title" ref={n => (this.transitionTitle = n)}>
-                <FormattedMessage id="authorName" />
-                <br />
-                <FormattedMessage id="authorSurame" />
-              </h1>
+              <div
+                className="hero-paint"
+                ref={n => (this.transitionHeroPaint = n)}
+              >
+                <Image />
+              </div>
               <div
                 className={`overlay overlay--loader  ${context.shouldLoaderShow &&
                   "overlay--active"}`}
