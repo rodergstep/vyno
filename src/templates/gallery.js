@@ -84,7 +84,7 @@ class GalleryPage extends React.Component {
       <AppConsumer>
         {context => {
           return (
-            <Structure>
+            <Structure pageclass="page-gallery">
               <div className="container">
                 <div className="filter">
                   <ul className="filter__list">
@@ -113,11 +113,13 @@ class GalleryPage extends React.Component {
                     {this.state.posts.length}
                   </div>
                 </div>
-
-                {filteredPosts.length ? (
-                  chunk(filteredPosts.slice(0, this.state.postsToShow), 2).map(
-                    (chunk, i) => (
-                      <Grid container spacing={2} key={`chunk-${i}`}>
+                <div className="gallery__contr">
+                  {filteredPosts.length ? (
+                    chunk(
+                      filteredPosts.slice(0, this.state.postsToShow),
+                      2
+                    ).map((chunk, i) => (
+                      <Grid container spacing={3} key={`chunk-${i}`}>
                         {chunk.map(node => {
                           return (
                             <Grid key={node.id} item xs={12} md={6}>
@@ -126,21 +128,21 @@ class GalleryPage extends React.Component {
                           )
                         })}
                       </Grid>
-                    )
-                  )
-                ) : (
-                  <span>Картини у цю категорію іще не були додані</span>
-                )}
-                {!this.state.showingMore && filteredPosts.length > 4 && (
-                  <div className="btn-load-more">
-                    <button
-                      className="btn secondary"
-                      onClick={this.loadMorePosts}
-                    >
-                      <FormattedMessage id="loadMore" />
-                    </button>
-                  </div>
-                )}
+                    ))
+                  ) : (
+                    <span>Картини у цю категорію іще не були додані</span>
+                  )}
+                  {!this.state.showingMore && filteredPosts.length > 4 && (
+                    <div className="btn-load-more">
+                      <button
+                        className="btn secondary"
+                        onClick={this.loadMorePosts}
+                      >
+                        <FormattedMessage id="loadMore" />
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
             </Structure>
           )

@@ -40,25 +40,30 @@ a {
   left: 0;
   top: 0;
   width: 240px;
+  height: 100vh;
   color: rgba($color: #000000, $alpha: 0.7);
   a:hover {
     color: rgba(23, 94, 236, 1);
   }
 }
 .aside__inner {
-  padding: 24px 32px 16px;
-  font-weight: 400px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 24px 24px 32px;
+  font-weight: 400;
+  overflow-y: auto;
   figure {
     margin: 0;
   }
 }
 .aside__footer {
+  margin-top: auto;
   display: flex;
   align-items: center;
 }
 .main-logo {
   display: block;
-  max-width: 200px;
   margin: 0;
 }
 .author {
@@ -96,11 +101,7 @@ a {
 .hero-paint {
   opacity: 0;
   margin: 0 auto;
-  max-width: 1000px;
-
-  img {
-    max-height: 90vh;
-  }
+  max-width: 125vh;
 }
 .btn-load-more {
   display: flex;
@@ -113,12 +114,17 @@ a {
 }
 .figure {
   margin: 0;
-  height: calc(100% - 8px);
+  height: calc(100% - 16px);
   position: relative;
+  box-shadow: rgb(204, 204, 204) 1px 4px 8px 0px;
+  padding: 10px;
   &:hover {
     .figure__title {
       opacity: 1;
     }
+  }
+  .gatsby-image-wrapper {
+    max-height: 100%;
   }
 }
 .figure__title {
@@ -218,13 +224,29 @@ a {
 
 // Filter
 .filter {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
   border-bottom: 1px solid #d2d2d2;
-  margin: 0 0 16px;
+  background-color: #fff;
+  box-shadow: rgb(204, 204, 204);
+  padding-top: 32px;
+  margin: 0 0 32px 0;
   font-size: 14px;
   color: #000;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -16px;
+    left: -16px;
+    height: 100%;
+    background-color: #fff;
+  }
 }
 .filter__list {
   display: flex;
@@ -260,6 +282,9 @@ a {
       opacity: 1;
     }
   }
+}
+.fiter__total {
+  z-index: 1;
 }
 // Buttons
 .btn {
@@ -314,6 +339,23 @@ a {
       border-color: #175eec;
       background-color: #175eec;
       color: #fff;
+    }
+  }
+}
+.page-gallery {
+  .main {
+    position: relative;
+    padding-top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+    &::-webkit-scrollbar-track {
+      width: 0;
+    }
+    &::-webkit-scrollbar-thumb {
+      width: 0;
     }
   }
 }

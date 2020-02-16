@@ -16,10 +16,12 @@ const PaintTemplate = props => {
       <AppConsumer>
         {contextData => {
           return (
-            <div className="container" style={{ marginTop: "24px" }}>
+            <div className="container">
               <Grid container spacing={3}>
                 <Grid item xs={12} lg={8}>
-                  {image && <Img fluid={[{ ...image.fluid }]} fadeIn />}
+                  <div className="figure">
+                    {image && <Img fluid={[{ ...image.fluid }]} fadeIn />}
+                  </div>
                 </Grid>
                 <Grid item xs={12} lg={4}>
                   <AniLink

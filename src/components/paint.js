@@ -3,8 +3,6 @@ import { Link, graphql } from "gatsby"
 import Img from "gatsby-image"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
 
-let touched = false
-
 class Paint extends React.Component {
   constructor() {
     super()
