@@ -58,12 +58,11 @@ a {
 }
 .main-logo {
   display: block;
-  max-width: 130px;
+  max-width: 200px;
   margin: 0;
 }
 .author {
   margin-top: 4px;
-  display: flex;
   font-size: 14px;
 }
 .nav__list {
@@ -74,12 +73,15 @@ a {
   & > * {
     margin: 8px 0;
   }
+  a[aria-current="page"] {
+    color: #175eec;
+  }
 }
 .swith-language {
   font-size: 14px;
   margin-right: 16px;
-  a[aria-current="page"] {
-    font-weight: 700;
+  a.selected {
+    font-weight: 600;
   }
   span {
     margin: 0 4px;
@@ -93,8 +95,11 @@ a {
 }
 .hero-paint {
   opacity: 0;
+  margin: 0 auto;
+  max-width: 1000px;
+
   img {
-    max-height: 100vh;
+    max-height: 90vh;
   }
 }
 .btn-load-more {

@@ -12,7 +12,7 @@ const PaintTemplate = props => {
   const paint = props.data.contentfulPainting
   const { title, year, image, size, description, method } = paint
   return (
-    <Structure data={props.data} location={props.location}>
+    <Structure>
       <AppConsumer>
         {contextData => {
           return (
@@ -70,14 +70,6 @@ export default PaintTemplate
 
 export const pageQuery = graphql`
   query paintQuery($id: String!) {
-    site {
-      siteMetadata {
-        languages {
-          defaultLangKey
-          langs
-        }
-      }
-    }
     contentfulPainting(id: { eq: $id }) {
       id
       title

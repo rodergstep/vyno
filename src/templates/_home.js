@@ -49,8 +49,6 @@
 //           context.handleLoaderShow(true)
 //           return (
 //             <Structure
-//               data={this.props.data}
-//               location={this.props.location}
 //               pageclass="page-home"
 //             >
 //               <Tilt>
@@ -132,14 +130,6 @@
 
 // export const pageQuery = graphql`
 //   query PageHomeQuery($lang: String!) {
-//     site {
-//       siteMetadata {
-//         languages {
-//           defaultLangKey
-//           langs
-//         }
-//       }
-//     }
 //     home: allContentfulPainting(filter: { node_locale: { eq: $lang } }) {
 //       edges {
 //         node {

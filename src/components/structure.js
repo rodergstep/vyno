@@ -1,18 +1,13 @@
-import React, { useState, useRef, useEffect } from "react"
+import React from "react"
+import Img from "gatsby-image"
 import { TimelineMax, TweenLite, TimelineLite, Power1, Power2 } from "gsap"
-import { FormattedMessage } from "react-intl"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
-import IconButton from "@material-ui/core/IconButton"
 import MenuIcon from "@material-ui/icons/Menu"
-import FacebookIcon from "@material-ui/icons/Facebook"
 import { AppConsumer } from "../utils/context"
 import SelectLanguage from "./selectLanguage"
-import srcMainLogo from "../images/main-logo.jpg"
 
 const Structure = props => {
-  const langs = props.data.site.siteMetadata.languages.langs
-
-  const Aside = (langs, locale) => {
+  const Aside = (langs, locale, aside) => {
     const menu =
       locale === "en-US"
         ? [
@@ -41,16 +36,15 @@ const Structure = props => {
         </IconButton> */}
           <AniLink fade to={`/${locale}/`}>
             <figure>
-              <img
-                src={srcMainLogo}
-                alt="Viktor Vynogradov"
-                className="main-logo"
-              />
+              {aside.avatar && (
+                <Img
+                  fluid={[{ ...aside.avatar.fluid }]}
+                  className="main-logo"
+                  fadeIn
+                />
+              )}
             </figure>
-            <figcaption className="author">
-              <FormattedMessage id="authorName" />{" "}
-              <FormattedMessage id="authorSurame" />
-            </figcaption>
+            <figcaption className="author">{aside.author_name}</figcaption>
           </AniLink>
 
           <div className="nav">
@@ -91,7 +85,7 @@ const Structure = props => {
       {context => {
         return (
           <div className={`page-wrap ${props.pageclass}`}>
-            {Aside(langs, context.locale)}
+            {Aside(context.langsMenu, context.locale, context.aside)}
             <main className="main">{props.children}</main>
           </div>
         )

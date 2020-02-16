@@ -12,7 +12,7 @@ class AboutPage extends React.Component {
   render() {
     let aboutEdges = this.props.data.about.edges
     return (
-      <Structure data={this.props.data} location={this.props.location}>
+      <Structure>
         <div className="container">
           {aboutEdges.map((node, i) => {
             const { title, image, contentful_id, description } = node.node
@@ -51,14 +51,6 @@ export default AboutPage
 
 export const pageQuery = graphql`
   query PageAboutQuery($lang: String!) {
-    site {
-      siteMetadata {
-        languages {
-          defaultLangKey
-          langs
-        }
-      }
-    }
     about: allContentfulPageAbout(filter: { node_locale: { eq: $lang } }) {
       edges {
         node {

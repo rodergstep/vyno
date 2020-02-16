@@ -19,6 +19,21 @@ export default props => (
             }
           }
         }
+        navData: allContentfulPageHome {
+          edges {
+            node {
+              node_locale
+              author_name
+              avatar {
+                contentful_id
+                fluid(maxWidth: 400, quality: 70) {
+                  ...GatsbyContentfulFluid
+                }
+                title
+              }
+            }
+          }
+        }
       }
     `}
     render={data => {
@@ -30,7 +45,9 @@ export default props => (
       const langKey = getCurrentLangKey(langs, defaultLangKey, url)
       const homeLink = `/${langKey}/`
       const langsMenu = getLangs(langs, langKey, getUrlForLang(homeLink, url))
-
+      const aside = data.navData.edges.filter(
+        i => i.node.node_locale === langKey
+      )[0].node
       // get the appropriate message file based on langKey
       // at the moment this assumes that langKey will provide us
       // with the appropriate language code
@@ -38,6 +55,7 @@ export default props => (
       const contextData = {
         locale: langKey,
         langsMenu: langsMenu,
+        aside,
         shouldLoaderShow: shouldLoaderShow,
         handleLoaderShow: e => handleLoaderShow(e),
       }

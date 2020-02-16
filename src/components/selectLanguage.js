@@ -6,8 +6,16 @@ const SelectLanguage = props => {
   return (
     <div className="swith-language">
       {props.langs.map((lang, i) => (
-        <AniLink to={`/${lang}`} key={lang} selected={`/${props.locale}`}>
-          {lang === "uk-UA" ? "укр" : lang === "en-US" ? "eng" : lang}
+        <AniLink
+          to={`/${lang.langKey}`}
+          key={lang.langKey}
+          className={lang.selected ? "selected" : ""}
+        >
+          {lang.langKey === "uk-UA"
+            ? "укр"
+            : lang.langKey === "en-US"
+            ? "eng"
+            : lang.langKey}
           {i !== props.langs.length - 1 ? <span>/</span> : null}
         </AniLink>
       ))}

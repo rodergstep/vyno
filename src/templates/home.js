@@ -2,7 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import { TweenLite, TimelineLite, Power1 } from "gsap"
 import { AppConsumer } from "../utils/context"
-import Image from "../components/image"
+import Img from "gatsby-image"
 import Structure from "../components/structure"
 
 class HomePage extends React.Component {
@@ -38,23 +38,20 @@ class HomePage extends React.Component {
   }
 
   render() {
-    let homePaintEdges = this.props.data.home.edges
-    const posts = homePaintEdges.map(e => e.node)
+    let homeDataEdges = this.props.data.home.edges
+    const homeData = homeDataEdges.map(e => e.node)
+    const { heroPaint } = homeData[0]
     return (
       <AppConsumer>
         {context => {
-          context.handleLoaderShow(true)
+          // context.handleLoaderShow(true)
           return (
-            <Structure
-              data={this.props.data}
-              location={this.props.location}
-              pageclass="page-home"
-            >
+            <Structure pageclass="page-home">
               <div
                 className="hero-paint"
                 ref={n => (this.transitionHeroPaint = n)}
               >
-                <Image />
+                {heroPaint && <Img fluid={[{ ...heroPaint.fluid }]} fadeIn />}
               </div>
               <div
                 className={`overlay overlay--loader  ${context.shouldLoaderShow &&
@@ -79,19 +76,16 @@ export default HomePage
 
 export const pageQuery = graphql`
   query PageHomeQuery($lang: String!) {
-    site {
-      siteMetadata {
-        languages {
-          defaultLangKey
-          langs
-        }
-      }
-    }
-    home: allContentfulPainting(filter: { node_locale: { eq: $lang } }) {
+    home: allContentfulPageHome(filter: { node_locale: { eq: $lang } }) {
       edges {
         node {
-          id
-          ...Painting
+          heroPaint {
+            contentful_id
+            fluid(maxWidth: 1600, quality: 70) {
+              ...GatsbyContentfulFluid
+            }
+            title
+          }
         }
       }
     }

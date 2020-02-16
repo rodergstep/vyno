@@ -11,7 +11,7 @@ class PoetryPage extends React.Component {
   render() {
     let poetryEdges = this.props.data.poetry.edges
     return (
-      <Structure data={this.props.data} location={this.props.location}>
+      <Structure>
         <div className="container">
           {poetryEdges.map((node, i) => {
             const { title, poems } = node.node
@@ -41,14 +41,6 @@ export default PoetryPage
 
 export const pageQuery = graphql`
   query PagePoetryQuery($lang: String!) {
-    site {
-      siteMetadata {
-        languages {
-          defaultLangKey
-          langs
-        }
-      }
-    }
     poetry: allContentfulPagePoetry(filter: { node_locale: { eq: $lang } }) {
       edges {
         node {

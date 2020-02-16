@@ -55,7 +55,6 @@ class GalleryPage extends React.Component {
   componentDidMount() {
     window.addEventListener(`scroll`, this.handleScroll)
     const posts = this.props.data.home.edges.map(e => e.node)
-    console.log("compdm")
     this.setState(state => ({
       posts: posts,
       filteredPosts: state.filteredValue === "all" ? posts : state.filterPosts,
@@ -85,7 +84,7 @@ class GalleryPage extends React.Component {
       <AppConsumer>
         {context => {
           return (
-            <Structure data={this.props.data} location={this.props.location}>
+            <Structure>
               <div className="container">
                 <div className="filter">
                   <ul className="filter__list">
@@ -100,11 +99,8 @@ class GalleryPage extends React.Component {
                     {methods.length &&
                       methods.map(m => (
                         <li
-                          className={`filter__list-item ${
-                            m.node.name === this.state.filteredValue
-                              ? "is-active"
-                              : ""
-                          }`}
+                          className={`filter__list-item ${m.node.name ===
+                            this.state.filteredValue && "is-active"}`}
                           key={m.node.id}
                           onClick={() => this.filterPosts(m.node.name)}
                         >
@@ -158,14 +154,6 @@ export default GalleryPage
 
 export const pageQuery = graphql`
   query PageGalleryQuery($lang: String!) {
-    site {
-      siteMetadata {
-        languages {
-          defaultLangKey
-          langs
-        }
-      }
-    }
     home: allContentfulPainting(filter: { node_locale: { eq: $lang } }) {
       edges {
         node {
