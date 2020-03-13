@@ -14,7 +14,7 @@ const Structure = props => {
             { link: "/en-US/", text: "Main" },
             { link: "/en-US/gallery/", text: "Paints" },
             { link: "/en-US/poetry/", text: "Poetry" },
-            { link: "/en-US/about/", text: "About author" },
+            { link: "/en-US/about/", text: "About the author" },
           ]
         : [
             { link: "/uk-UA/", text: "Головна" },
@@ -87,6 +87,13 @@ const Structure = props => {
           <div className={`page-wrap ${props.pageclass}`}>
             {Aside(context.langsMenu, context.locale, context.aside)}
             <main className="main">{props.children}</main>
+            {/* <AniLink
+              fade
+              to={`/${context.locale}/cart`}
+              className="cart-sticked"
+            >
+              {context.cartApi.viewCart().length}
+            </AniLink> */}
           </div>
         )
       }}

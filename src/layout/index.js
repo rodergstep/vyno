@@ -1,11 +1,11 @@
-import React, { Component, useState } from "react"
+import React, { useState, useMemo, useCallback } from "react"
 import { StaticQuery, graphql } from "gatsby"
-import { AppProvider } from "../utils/context"
-import Structure from "../components/structure"
 import Helmet from "react-helmet"
 import { getCurrentLangKey, getLangs, getUrlForLang } from "ptz-i18n"
 import { IntlProvider } from "react-intl"
 import "intl"
+import { AppProvider } from "../utils/context"
+// import cart from "../components/cart"
 
 export default props => (
   <StaticQuery
@@ -38,7 +38,6 @@ export default props => (
     `}
     render={data => {
       const [shouldLoaderShow, handleLoaderShow] = useState(false)
-
       const location = props.location
       const url = location.pathname
       const { langs, defaultLangKey } = data.site.siteMetadata.languages
@@ -58,6 +57,7 @@ export default props => (
         aside,
         shouldLoaderShow: shouldLoaderShow,
         handleLoaderShow: e => handleLoaderShow(e),
+        // cartApi: cart(),
       }
       return (
         <AppProvider value={contextData}>

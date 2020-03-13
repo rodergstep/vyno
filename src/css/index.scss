@@ -108,15 +108,22 @@ a {
   justify-content: center;
   margin: 48px auto 24px;
 }
+button:disabled {
+  opacity: 0.5;
+}
 .backlink {
   margin-left: -0.2em;
   font-size: 14px;
+  text-transform: lowercase;
+  .MuiSvgIcon-root {
+    font-size: 20px;
+  }
 }
 .figure {
   margin: 0;
   height: calc(100% - 16px);
   position: relative;
-  box-shadow: rgb(204, 204, 204) 1px 4px 8px 0px;
+  box-shadow: rgba(204, 204, 204, 0.6) 1px 4px 8px 0px;
   padding: 10px;
   &:hover {
     .figure__title {
@@ -149,16 +156,22 @@ a {
 .paint__title {
   margin-top: 16px;
   font-weight: 600;
+  font-size: 32px;
 }
 .paint__info {
   display: flex;
   flex-wrap: wrap;
+  font-size: 14px;
+  text-transform: lowercase;
   & > * {
     margin-right: 32px;
   }
 }
 .paint__descr {
   margin-top: 16px;
+}
+.paint__price {
+  margin-top: 12px;
 }
 .nav__socials {
   display: flex;
@@ -341,6 +354,10 @@ a {
       color: #fff;
     }
   }
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 }
 .page-gallery {
   .main {
@@ -358,4 +375,12 @@ a {
       width: 0;
     }
   }
+}
+.cart-sticked {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1;
+  border-radius: 50%;
+  background: #175eec;
 }

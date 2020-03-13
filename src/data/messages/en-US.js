@@ -9,4 +9,5 @@ module.exports = {
   filterFrom: "from",
   authorName: "Viktor",
   authorSurame: "Vynogradov",
+  buyBtn: "Want it",
 }

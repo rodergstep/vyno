@@ -53,7 +53,7 @@ class GalleryPage extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener(`scroll`, this.handleScroll)
+    window.addEventListener("scroll", this.handleScroll, true)
     const posts = this.props.data.home.edges.map(e => e.node)
     this.setState(state => ({
       posts: posts,
