@@ -60,7 +60,7 @@ module.exports = {
       options: {
         fonts: [
           {
-            family: `Roboto`,
+            family: `Assistant`,
             variants: [`300`, `400`, `700`],
             subsets: [`latin`, `cyrillic`],
           },

@@ -9,5 +9,11 @@ module.exports = {
   filterFrom: "from",
   authorName: "Viktor",
   authorSurame: "Vynogradov",
-  buyBtn: "Want it",
+  btnAddCart: "Want this masterpiece",
+  btnRemoveFromCart: "Don't want this masterpiece",
+  btnReserCart: "Clear all",
+  isOrderSentFailed: "Clear all",
+  isOrderSentFailed: "Clear all",
+  yourName: "your name",
+  yourEmail: "your email",
 }

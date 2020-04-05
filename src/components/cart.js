@@ -4,10 +4,10 @@ import { updateCart, getCart } from "../utils/cart.service"
 const Cart = () => {
   const [cart, setCart] = useState(getCart())
   const addToCart = useCallback(item =>
-    setCart(prevCart => [...prevCart, item])
+    setCart(prevCart => prevCart &&  [...prevCart, item])
   )
   const removeFromCart = useCallback(item =>
-    setCart(prevCart => prevCart.filter(obj => obj.id !== item.id))
+    setCart(prevCart => prevCart.filter(obj => obj.contentful_id !== item.contentful_id))
   )
   const resetCart = useCallback(() => setCart([]), [])
 

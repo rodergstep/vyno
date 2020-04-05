@@ -1,11 +1,11 @@
-import React, { useState, useMemo, useCallback } from "react"
+import React, { useState } from "react"
 import { StaticQuery, graphql } from "gatsby"
 import Helmet from "react-helmet"
 import { getCurrentLangKey, getLangs, getUrlForLang } from "ptz-i18n"
 import { IntlProvider } from "react-intl"
 import "intl"
 import { AppProvider } from "../utils/context"
-// import cart from "../components/cart"
+import cart from "../components/cart"
 
 export default props => (
   <StaticQuery
@@ -57,7 +57,7 @@ export default props => (
         aside,
         shouldLoaderShow: shouldLoaderShow,
         handleLoaderShow: e => handleLoaderShow(e),
-        // cartApi: cart(),
+        cartApi: cart(),
       }
       return (
         <AppProvider value={contextData}>

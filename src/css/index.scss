@@ -1,7 +1,7 @@
 body,
 html {
   height: 100%;
-  font-family: "Roboto", sans-serif;
+  font-family: "Assistant", sans-serif;
   font-weight: 300;
   color: #212121;
   letter-spacing: 0.01em;
@@ -15,6 +15,9 @@ a {
 }
 .d-flex {
   display: flex;
+}
+.mr-2 {
+  margin-right: 16px !important;
 }
 .align-center {
   align-items: center;
@@ -43,7 +46,7 @@ a {
   height: 100vh;
   color: rgba($color: #000000, $alpha: 0.7);
   a:hover {
-    color: rgba(23, 94, 236, 1);
+    color: #dc390e;
   }
 }
 .aside__inner {
@@ -79,7 +82,7 @@ a {
     margin: 8px 0;
   }
   a[aria-current="page"] {
-    color: #175eec;
+    color: #dc390e;
   }
 }
 .swith-language {
@@ -171,7 +174,10 @@ button:disabled {
   margin-top: 16px;
 }
 .paint__price {
-  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  font-size: 32px;
+  margin-top: 16px;
 }
 .nav__socials {
   display: flex;
@@ -274,7 +280,7 @@ button:disabled {
   margin: 0;
   cursor: pointer;
   &:hover {
-    color: #175eec;
+    color: #dc390e;
   }
   &:after {
     content: "";
@@ -284,12 +290,12 @@ button:disabled {
     display: inline-block;
     width: 100%;
     height: 1px;
-    background-color: #175eec;
+    background-color: #dc390e;
     transition: all 0.4s ease;
     opacity: 0;
   }
   &.is-active {
-    color: #175eec;
+    color: #dc390e;
     &:after {
       z-index: 1;
       opacity: 1;
@@ -334,13 +340,14 @@ button:disabled {
   }
   &.primary {
     color: #fff;
-    background-image: linear-gradient(to bottom, #239bff, #0f7cd8 133%);
+    background-color: #dc390e;
     border: none;
     .icon {
       fill: currentColor;
     }
     &:hover {
-      color: #fff;
+      cursor: pointer;
+      background-color: lighten($color: #dc390e, $amount: 5);
     }
   }
   &.secondary {
@@ -349,8 +356,8 @@ button:disabled {
     padding: 8px 16px;
     background-color: transparent;
     &:hover {
-      border-color: #175eec;
-      background-color: #175eec;
+      border-color: #dc390e;
+      background-color: #dc390e;
       color: #fff;
     }
   }
@@ -376,11 +383,75 @@ button:disabled {
     }
   }
 }
+// Cart
+.cart__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
 .cart-sticked {
+  display: flex;
   position: fixed;
   bottom: 20px;
   right: 20px;
   z-index: 1;
+}
+.cart-sticked__icon {
+  width: 1em;
+  height: 1em;
+  font-size: 48px;
+}
+.cart-sticked__pieces {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6em;
+  height: 1.6em;
+  font-size: 16px;
+  position: absolute;
+  right: -0.4em;
+  top: -0.4em;
+  background-color: #dc390e;
+  color: #fff;
+  // background-color: rgba(216,216,216,.8);
   border-radius: 50%;
-  background: #175eec;
+}
+.cart__figure {
+  margin: 0;
+  width: 120px;
+  position: relative;
+}
+.cart-wrap {
+  max-width: 768px;
+}
+.cart__table {
+  tr td {
+    vertical-align: top;
+    text-align: left;
+    &:last-child {
+      text-align: right;
+    }
+  }
+  tr:last-child td {
+    border-bottom: none;
+  }
+}
+.cart__item-link {
+  display: flex;
+  font-style: italic;
+}
+.form {
+  max-width: 480px;
+  input {
+    width: 100%;
+    padding-left: 8px;
+    height: 48px;
+  }
+}
+.form__field {
+  margin-bottom: 20px;
+}
+.form__footer {
+  display: flex;
+  justify-content: flex-end;
 }

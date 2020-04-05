@@ -9,5 +9,9 @@ module.exports = {
   filterFrom: "з",
   authorName: "Віктор",
   authorSurame: "Виноградов",
-  buyBtn: "Хочу",
+  btnAddCart: "Хочу цей шедевр",
+  btnRemoveFromCart: "Не хочу цей шедевр",
+  btnReserCart: "Очистити",
+  yourName: "ваше ім'я",
+  yourEmail: "ваш email",
 }

@@ -81,6 +81,7 @@ exports.createPages = ({ graphql, actions }) => {
           const homeTemplate = path.resolve(`./src/templates/home.js`)
           const galleryTemplate = path.resolve(`./src/templates/gallery.js`)
           const aboutTemplate = path.resolve(`./src/templates/about.js`)
+          const cartTemplate = path.resolve(`./src/templates/cart.js`)
           const poetryTemplate = path.resolve(`./src/templates/poetry.js`)
           _.each(result.data.site.siteMetadata.languages.langs, lang => {
             createPage({
@@ -100,6 +101,13 @@ exports.createPages = ({ graphql, actions }) => {
             createPage({
               path: `/${lang}/about/`,
               component: slash(aboutTemplate),
+              context: {
+                lang: `${lang}`,
+              },
+            })
+            createPage({
+              path: `/${lang}/cart/`,
+              component: slash(cartTemplate),
               context: {
                 lang: `${lang}`,
               },
