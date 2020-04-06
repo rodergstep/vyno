@@ -24,11 +24,14 @@ class CartPage extends React.Component {
   }
   componentDidMount() {
     const cartEdges = this.props.data.cart.edges
-    const items = getCart()
-    const totalPrice = items.reduce(
-      (total, obj) => obj.price && +total + +obj.price,
-      0
-    )
+    const items = getCart() || []
+    let totalPrice = 0
+    if (items && items.length > 0) {
+      totalPrice = items.reduce(
+        (total, obj) => obj.price && +total + +obj.price,
+        0
+      )
+    }
     this.setState({ cartEdges, items, totalPrice })
   }
 
