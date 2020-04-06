@@ -27,15 +27,15 @@ const PaintTemplate = props => {
     <Structure>
       <AppConsumer>
         {context => {
-          const { removeFromCart, addToCart, viewCart } = context.cartApi
-          const isAddedToCart = viewCart() && viewCart().some(
+          const isAddedToCart = context.cartApi.viewCart() && context.cartApi.viewCart().some(
             el => el.contentful_id === contentful_id
           )
           const handlePaintBuy = () => {
+            console.log(context)
             if (isAddedToCart) {
-              removeFromCart(paint)
+              context.cartApi.removeFromCart(paint)
             } else {
-              addToCart(paint)
+              context.cartApi.addToCart(paint)
             }
           }
           return (
