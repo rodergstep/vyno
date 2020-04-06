@@ -107,7 +107,7 @@ class CartPage extends React.Component {
                     const { items, totalPrice } = this.state
                     const { title, description } = node.node
                     return (
-                      <div className="cart-wrap">
+                      <div key={i} className="cart-wrap">
                         {items.length > 0 ? (
                           <Grid key={i} container spacing={3}>
                             <Grid item xs={12}>
