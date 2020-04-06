@@ -86,7 +86,7 @@ const isCartPage = (typeof window !== 'undefined') && location.pathname.includes
           <div className={`page-wrap ${props.pageclass}`}>
             {Aside(context.langsMenu, context.locale, context.aside)}
             <main className="main">{props.children}</main>
-            {!isCartPage && <AniLink
+            {!isCartPage && context.cartApi.viewCart() && context.cartApi.viewCart().length>0 && <AniLink
               fade
               to={`/${context.locale}/cart`}
               className="cart-sticked"
@@ -144,7 +144,7 @@ const isCartPage = (typeof window !== 'undefined') && location.pathname.includes
                   </g>
                 </g>
               </svg>
-              <span className="cart-sticked__pieces">{context.cartApi.viewCart() && context.cartApi.viewCart().length}</span>  
+              <span className="cart-sticked__pieces">{context.cartApi.viewCart().length}</span>  
               
             </AniLink>}
           </div>

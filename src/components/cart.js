@@ -3,6 +3,8 @@ import { updateCart, getCart } from "../utils/cart.service"
 
 const Cart = () => {
   const [cart, setCart] = useState(getCart())
+  console.log(cart)
+  console.log(setCart)
   const addToCart = useCallback(item =>
     setCart(prevCart => prevCart &&  [...prevCart, item])
   )
