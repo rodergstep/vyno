@@ -7,6 +7,7 @@ import { FormattedMessage } from "react-intl"
 import ChevronLeftRoundedIcon from "@material-ui/icons/ChevronLeftRounded"
 import Structure from "../components/structure"
 import { AppConsumer } from "../utils/context"
+import { useCart } from '../utils/cartContext';
 
 const PaintTemplate = props => {
   const paint = props.data.contentfulPainting
@@ -23,20 +24,21 @@ const PaintTemplate = props => {
   } = paint
   paint.url = (typeof window !== 'undefined') && location.pathname
 
+  const [cart, cartApi] = useCart();
   return (
     <Structure>
       <AppConsumer>
         {context => {
-          const isAddedToCart = false && context.cartApi.viewCart() && context.cartApi.viewCart().some(
+          console.log(cart)
+          const isAddedToCart = cart && Array.isArray(cart) && cart.some(
             el => el.contentful_id === contentful_id
-          )
-          const handlePaintBuy = () => {
-            console.log(context)
-            // if (isAddedToCart) {
-            //   context.cartApi.removeFromCart(paint)
-            // } else {
-            //   context.cartApi.addToCart(paint)
-            // }
+            )
+            const handlePaintBuy = () => {
+              if (isAddedToCart) {
+                cartApi(paint, 'DELETE')
+              } else {
+                cartApi(paint, 'ADD')
+              }
           }
           return (
             <div className="container">

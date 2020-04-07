@@ -4,8 +4,7 @@ import AniLink from "gatsby-plugin-transition-link/AniLink"
 import MenuIcon from "@material-ui/icons/Menu"
 import { AppConsumer } from "../utils/context"
 import SelectLanguage from "./selectLanguage"
-import ThemeToggler from './ThemeToggler';
-import cart from '../components/cart'
+import { useCart } from '../utils/cartContext';
 
 const Structure = props => {
   const Aside = (langs, locale, aside) => {
@@ -59,7 +58,6 @@ const Structure = props => {
               ))}
             </ul>
           </div>
-          <ThemeToggler />
           <div className="aside__footer">
             <SelectLanguage langs={langs} locale={locale} />
             <a
@@ -81,7 +79,10 @@ const Structure = props => {
       </aside>
     )
   }
-const isCartPage = (typeof window !== 'undefined') && location.pathname.includes('cart')
+  const isCartPage =
+    typeof window !== "undefined" && location.pathname.includes("cart")
+  const [cart] = useCart()
+
   return (
     <AppConsumer>
       {context => {
@@ -89,21 +90,22 @@ const isCartPage = (typeof window !== 'undefined') && location.pathname.includes
           <div className={`page-wrap ${props.pageclass}`}>
             {Aside(context.langsMenu, context.locale, context.aside)}
             <main className="main">{props.children}</main>
-            {!isCartPage && false && cart().viewCart() && cart().viewCart().length>0 && <AniLink
-              fade
-              to={`/${context.locale}/cart`}
-              className="cart-sticked"
-            >
-              <svg
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                className="cart-sticked__icon"
-                viewBox="0 0 512.001 512.001"
+            {!isCartPage && cart && cart.length > 0 && (
+              <AniLink
+                fade
+                to={`/${context.locale}/cart`}
+                className="cart-sticked"
               >
-                <g>
+                <svg
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="cart-sticked__icon"
+                  viewBox="0 0 512.001 512.001"
+                >
                   <g>
-                    <path
-                      d="M484.158,325.327h-13.964v-187.4c0-4.328-3.509-7.837-7.837-7.837c-4.329,0-7.837,3.509-7.837,7.837v187.4H57.481V73.08
+                    <g>
+                      <path
+                        d="M484.158,325.327h-13.964v-187.4c0-4.328-3.509-7.837-7.837-7.837c-4.329,0-7.837,3.509-7.837,7.837v187.4H57.481V73.08
 			h112.949v10.085c0,7.203,5.859,13.061,13.061,13.061h40.117c4.329,0,7.837-3.509,7.837-7.837c0-4.328-3.508-7.837-7.837-7.837
 			h-37.506V51.722h139.794v28.831H258.09c-4.329,0-7.837,3.509-7.837,7.837s3.508,7.837,7.837,7.837h70.42
 			c7.201,0,13.061-5.859,13.061-13.061V73.08h112.949v31.41c0,4.328,3.508,7.837,7.837,7.837c4.328,0,7.837-3.509,7.837-7.837
@@ -125,31 +127,31 @@ const isCartPage = (typeof window !== 'undefined') && location.pathname.includes
 			c0,4.328,3.508,7.837,7.837,7.837c4.329,0,7.837-3.509,7.837-7.837v-24.32h5.94v37.74h-27.553v-37.74H248.164z M226.55,380.578
 			v37.74h-55.248l18.19-37.74H226.55z M172.092,380.578l-55.58,115.32c-0.154,0.156-0.473,0.356-0.681,0.428H93.361l55.787-115.749
 			H172.092z"
-                    />
+                      />
+                    </g>
                   </g>
-                </g>
-                <g>
                   <g>
-                    <path
-                      d="M209.239,60.594c-1.463-1.452-3.479-2.288-5.539-2.288c-2.069,0-4.087,0.836-5.548,2.288
+                    <g>
+                      <path
+                        d="M209.239,60.594c-1.463-1.452-3.479-2.288-5.539-2.288c-2.069,0-4.087,0.836-5.548,2.288
 			c-1.452,1.463-2.288,3.48-2.288,5.548c0,2.058,0.837,4.075,2.288,5.538c1.462,1.452,3.479,2.299,5.548,2.299
 			c2.06,0,4.075-0.846,5.539-2.299c1.462-1.463,2.298-3.479,2.298-5.538C211.537,64.073,210.701,62.057,209.239,60.594z"
-                    />
+                      />
+                    </g>
                   </g>
-                </g>
-                <g>
                   <g>
-                    <path
-                      d="M313.842,60.594c-1.452-1.452-3.479-2.288-5.538-2.288s-4.086,0.836-5.538,2.288c-1.463,1.463-2.299,3.48-2.299,5.548
+                    <g>
+                      <path
+                        d="M313.842,60.594c-1.452-1.452-3.479-2.288-5.538-2.288s-4.086,0.836-5.538,2.288c-1.463,1.463-2.299,3.48-2.299,5.548
 			c0,2.058,0.836,4.075,2.299,5.538c1.452,1.452,3.479,2.288,5.538,2.288s4.087-0.836,5.538-2.288
 			c1.463-1.463,2.299-3.479,2.299-5.538C316.141,64.073,315.305,62.057,313.842,60.594z"
-                    />
+                      />
+                    </g>
                   </g>
-                </g>
-              </svg>
-              <span className="cart-sticked__pieces">{false && cart().viewCart().length}</span>  
-              
-            </AniLink>}
+                </svg>
+                <span className="cart-sticked__pieces">{cart.length}</span>
+              </AniLink>
+            )}
           </div>
         )
       }}

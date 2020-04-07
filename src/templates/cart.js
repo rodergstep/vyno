@@ -1,42 +1,34 @@
-import React from "react"
+import React, { useState } from "react"
 import ReactDOMServer from "react-dom/server"
 import emailjs from "emailjs-com"
-import { getCart } from "../utils/cart.service"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import Grid from "@material-ui/core/Grid"
 import Structure from "../components/structure"
-import { AppConsumer } from "../utils/context"
 import OrderForm from "../components/forms/orderForm"
 import { FormattedMessage } from "react-intl"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
+import { useCart } from "../utils/cartContext"
 
-class CartPage extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      cartEdges: [],
-      items: [],
-      totalPrice: 0,
-      isOrderSentSuccessfully: false,
-      isOrderSentFailed: false,
-    }
-  }
-  componentDidMount() {
-    const cartEdges = this.props.data.cart.edges
-    const items = getCart() || []
-    let totalPrice = 0
-    if (items && items.length > 0) {
-      totalPrice = items.reduce(
-        (total, obj) => obj.price && +total + +obj.price,
-        0
-      )
-    }
-    this.setState({ cartEdges, items, totalPrice })
-  }
+const CartPage = props => {
+  const [isOrderSentSuccessfully, setOrderSent] = useState(false)
+  const [isOrderSentFailed, setOrderSentFailed] = useState(false)
 
-  sendOrder = data => {
-    const { items, totalPrice } = this.state
+  const cartEdges = props.data.cart.edges
+  const [cart, cartApi] = useCart()
+  const isCartExist = cart && Array.isArray(cart)
+  let totalPrice = 0
+  if (isCartExist) {
+    totalPrice = cart.reduce(
+      (total, obj) => obj.price && +total + +obj.price,
+      0
+    )
+  }
+  // componentDidUpdate() {
+  //   this.state.isOrderSentSuccessfully && cartApi([], 'RESET')
+  // }
+
+  const sendOrder = data => {
     const message_html = ReactDOMServer.renderToStaticMarkup(
       <div>
         <table>
@@ -48,8 +40,8 @@ class CartPage extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {items &&
-              items.map((item, i) => (
+            {cart &&
+              cart.map((item, i) => (
                 <tr key={item.id}>
                   <td>{i}</td>
                   <td>
@@ -81,7 +73,7 @@ class CartPage extends React.Component {
       )
       .then(res => {
         console.log("Email successfully sent!")
-        this.setState({ isOrderSentSuccessfully: true })
+        setOrderSent(true)
       })
       // Handle errors here however you like, or use a React error boundary
       .catch(err => {
@@ -89,111 +81,94 @@ class CartPage extends React.Component {
           "Oh well, you failed. Here some thoughts on the error that occured:",
           err
         )
-        this.setState({ isOrderSentFailed: true })
+        setOrderSentFailed(true)
       })
   }
 
-  render() {
-    return (
-      <AppConsumer>
-        {context => {
-          this.state.isOrderSentSuccessfully && context.cartApi.resetCart()
-
-          return (
-            <Structure>
-              <div className="container">
-                {this.state.cartEdges &&
-                  this.state.cartEdges.map((node, i) => {
-                    const { items, totalPrice } = this.state
-                    const { title, description } = node.node
-                    return (
-                      <div key={i} className="cart-wrap">
-                        {items.length > 0 ? (
-                          <Grid key={i} container spacing={3}>
-                            <Grid item xs={12}>
-                              <div className="cart__header">
-                                <h2 className="cart__title">{title}</h2>
-                                <button
-                                  className="btn transparent"
-                                  onClick={() => context.cartApi.resetCart()}
-                                >
-                                  <FormattedMessage id="btnReserCart" />
-                                </button>
-                              </div>
-
-                              <table className="cart__table">
-                                <tbody>
-                                  {items &&
-                                    items.map((item, i) => (
-                                      <tr key={item.id}>
-                                        <td>
-                                          <AniLink
-                                            fade
-                                            to={item.url}
-                                            className="cart__item-link"
-                                          >
-                                            <div className="cart__figure mr-2">
-                                              {item.image && (
-                                                <Img
-                                                  fluid={[
-                                                    { ...item.image.fluid },
-                                                  ]}
-                                                  fadeIn
-                                                />
-                                              )}
-                                            </div>
-                                            {item.title}
-                                          </AniLink>
-                                        </td>
-                                        <td>${item.price}</td>
-                                      </tr>
-                                    ))}
-                                  <tr>
-                                    <td></td>
-                                    <td>${totalPrice}</td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </Grid>
-                            <Grid item xs={12}>
-                              {this.state.isOrderSentSuccessfully ? (
-                                description && (
-                                  <div
-                                    className="paint__descr"
-                                    dangerouslySetInnerHTML={{
-                                      __html:
-                                        description.childMarkdownRemark.html,
-                                    }}
-                                  />
-                                )
-                              ) : (
-                                <OrderForm sendOrder={this.sendOrder} />
-                              )}
-                              {this.state.isOrderSentFailed && (
-                                <div>
-                                  <p>
-                                    Щось піщло не так. Спробуйте замовити
-                                    пізніше.
-                                  </p>
-                                  <p>Something gone wrong. Pls, try again</p>
-                                </div>
-                              )}
-                            </Grid>
-                          </Grid>
-                        ) : (
-                          `Please, click on the button 'Want this masterpiece' to add picture into the cart.
-                          Будь ласка, натисніть кнопку "Хочу цей шедевр", щоб додати картину до кошика`
-                        )}
+  return (
+    <Structure>
+      <div className="container">
+        {cartEdges &&
+          cartEdges.map((node, i) => {
+            const { title, description } = node.node
+            return (
+              <div key={i} className="cart-wrap">
+                {cart.length > 0 ? (
+                  <Grid key={i} container spacing={3}>
+                    <Grid item xs={12}>
+                      <div className="cart__header">
+                        <h2 className="cart__title">{title}</h2>
+                        <button
+                          className="btn transparent"
+                          onClick={() => cartApi([], 'RESET')}
+                        >
+                          <FormattedMessage id="btnReserCart" />
+                        </button>
                       </div>
-                    )
-                  })}
+
+                      <table className="cart__table">
+                        <tbody>
+                          {isCartExist &&
+                            cart.map((item, i) => (
+                              <tr key={item.id}>
+                                <td>
+                                  <AniLink
+                                    fade
+                                    to={item.url}
+                                    className="cart__item-link"
+                                  >
+                                    <div className="cart__figure mr-2">
+                                      {item.image && (
+                                        <Img
+                                          fluid={[{ ...item.image.fluid }]}
+                                          fadeIn
+                                        />
+                                      )}
+                                    </div>
+                                    {item.title}
+                                  </AniLink>
+                                </td>
+                                <td>${item.price}</td>
+                              </tr>
+                            ))}
+                          <tr>
+                            <td></td>
+                            <td>${totalPrice}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </Grid>
+                    <Grid item xs={12}>
+                      {isOrderSentSuccessfully ? (
+                        description && (
+                          <div
+                            className="paint__descr"
+                            dangerouslySetInnerHTML={{
+                              __html: description.childMarkdownRemark.html,
+                            }}
+                          />
+                        )
+                      ) : (
+                        <OrderForm sendOrder={sendOrder} />
+                      )}
+                      {isOrderSentFailed && (
+                        <div>
+                          <p>Щось піщло не так. Спробуйте замовити пізніше.</p>
+                          <p>Something gone wrong. Pls, try again</p>
+                        </div>
+                      )}
+                    </Grid>
+                  </Grid>
+                ) : (
+                  `Please, click on the button 'Want this masterpiece' to add picture into the cart.
+                          Будь ласка, натисніть кнопку "Хочу цей шедевр", щоб додати картину до кошика`
+                )}
               </div>
-            </Structure>
-          )
-        }}
-      </AppConsumer>
-    )
-  }
+            )
+          })}
+      </div>
+    </Structure>
+  )
 }
 
 export default CartPage
