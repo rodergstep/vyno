@@ -4,6 +4,8 @@ import AniLink from "gatsby-plugin-transition-link/AniLink"
 import MenuIcon from "@material-ui/icons/Menu"
 import { AppConsumer } from "../utils/context"
 import SelectLanguage from "./selectLanguage"
+import ThemeToggler from './ThemeToggler';
+import cart from '../components/cart'
 
 const Structure = props => {
   const Aside = (langs, locale, aside) => {
@@ -57,6 +59,7 @@ const Structure = props => {
               ))}
             </ul>
           </div>
+          <ThemeToggler />
           <div className="aside__footer">
             <SelectLanguage langs={langs} locale={locale} />
             <a
@@ -86,7 +89,7 @@ const isCartPage = (typeof window !== 'undefined') && location.pathname.includes
           <div className={`page-wrap ${props.pageclass}`}>
             {Aside(context.langsMenu, context.locale, context.aside)}
             <main className="main">{props.children}</main>
-            {!isCartPage && context.cartApi.viewCart() && context.cartApi.viewCart().length>0 && <AniLink
+            {!isCartPage && false && cart().viewCart() && cart().viewCart().length>0 && <AniLink
               fade
               to={`/${context.locale}/cart`}
               className="cart-sticked"
@@ -144,7 +147,7 @@ const isCartPage = (typeof window !== 'undefined') && location.pathname.includes
                   </g>
                 </g>
               </svg>
-              <span className="cart-sticked__pieces">{context.cartApi.viewCart().length}</span>  
+              <span className="cart-sticked__pieces">{false && cart().viewCart().length}</span>  
               
             </AniLink>}
           </div>

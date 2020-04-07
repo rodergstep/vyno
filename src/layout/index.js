@@ -5,7 +5,8 @@ import { getCurrentLangKey, getLangs, getUrlForLang } from "ptz-i18n"
 import { IntlProvider } from "react-intl"
 import "intl"
 import { AppProvider } from "../utils/context"
-import cart from "../components/cart"
+import { ThemeProvider } from './../components/ThemeContext';
+
 
 export default props => (
   <StaticQuery
@@ -57,10 +58,10 @@ export default props => (
         aside,
         shouldLoaderShow: shouldLoaderShow,
         handleLoaderShow: e => handleLoaderShow(e),
-        cartApi: cart(),
       }
       return (
         <AppProvider value={contextData}>
+          <ThemeProvider>
           <IntlProvider locale={langKey} messages={i18nMessages}>
             <Helmet
               title="Viktor Vynogradov"
@@ -71,6 +72,7 @@ export default props => (
             />
             {props.children}
           </IntlProvider>
+          </ThemeProvider> 
         </AppProvider>
       )
     }}

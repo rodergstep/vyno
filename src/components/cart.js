@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback } from "react"
 import { updateCart, getCart } from "../utils/cart.service"
 
-const Cart = () => {
+const cart = () => {
   const [cart, setCart] = useState(getCart())
   console.log(cart)
   console.log(setCart)
@@ -22,4 +22,4 @@ const Cart = () => {
   return getApi
 }
 
-export default Cart
+export default cart
