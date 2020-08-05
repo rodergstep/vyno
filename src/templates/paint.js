@@ -3,13 +3,15 @@ import Grid from "@material-ui/core/Grid"
 import { graphql } from "gatsby"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
 import Img from "gatsby-image"
-import { FormattedMessage } from "react-intl"
+import { FormattedMessage, useIntl } from "react-intl"
+import Helmet from "react-helmet"
 import ChevronLeftRoundedIcon from "@material-ui/icons/ChevronLeftRounded"
 import Structure from "../components/structure"
 import { AppConsumer } from "../utils/context"
 import { useCart } from '../utils/cartContext';
 
 const PaintTemplate = props => {
+  const intl = useIntl()
   const paint = props.data.contentfulPainting
   const {
     id,
@@ -42,6 +44,12 @@ const PaintTemplate = props => {
           }
           return (
             <div className="container">
+            <Helmet
+              title={`${title} | ${intl.formatMessage({ id: "authorFullname" })}`}
+              meta={[
+                { name: "description", content: intl.formatMessage({ id: "seoDescr" }) }
+              ]}
+            />
               <Grid container spacing={3}>
                 <Grid item xs={12} lg={8}>
                   <div className="figure">

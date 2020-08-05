@@ -63,13 +63,6 @@ export default props => (
         <AppProvider value={contextData}>
           <CartProvider>
           <IntlProvider locale={langKey} messages={i18nMessages}>
-            <Helmet
-              title="Viktor Vynogradov"
-              meta={[
-                { name: "description", content: "Viktor Vynogradov" },
-                { name: "keywords", content: "Viktor Vynogradov" },
-              ]}
-            />
             {props.children}
           </IntlProvider>
           </CartProvider> 

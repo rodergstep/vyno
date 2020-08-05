@@ -1,6 +1,6 @@
 import React from "react"
 import { Formik } from "formik"
-import { useIntl, FormattedDate } from "react-intl"
+import { useIntl } from "react-intl"
 
 const OrderForm = props => {
   const intl = useIntl()

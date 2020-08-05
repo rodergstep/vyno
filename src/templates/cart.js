@@ -4,13 +4,16 @@ import emailjs from "emailjs-com"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import Grid from "@material-ui/core/Grid"
+import { FormattedMessage, useIntl } from "react-intl"
+import Helmet from "react-helmet"
 import Structure from "../components/structure"
 import OrderForm from "../components/forms/orderForm"
-import { FormattedMessage } from "react-intl"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
 import { useCart } from "../utils/cartContext"
 
 const CartPage = props => {
+  const intl = useIntl()
+
   const [isOrderSentSuccessfully, setOrderSent] = useState(false)
   const [isOrderSentFailed, setOrderSentFailed] = useState(false)
 
@@ -87,6 +90,15 @@ const CartPage = props => {
 
   return (
     <Structure>
+      <Helmet
+        title={`${intl.formatMessage({ id: "authorFullname" })}`}
+        meta={[
+          {
+            name: "description",
+            content: intl.formatMessage({ id: "seoDescr" }),
+          },
+        ]}
+      />
       <div className="container">
         {cartEdges &&
           cartEdges.map((node, i) => {
@@ -100,7 +112,7 @@ const CartPage = props => {
                         <h2 className="cart__title">{title}</h2>
                         <button
                           className="btn transparent"
-                          onClick={() => cartApi([], 'RESET')}
+                          onClick={() => cartApi([], "RESET")}
                         >
                           <FormattedMessage id="btnReserCart" />
                         </button>

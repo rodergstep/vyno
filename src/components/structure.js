@@ -1,13 +1,10 @@
-import React, {useState} from "react"
-import Img from "gatsby-image"
+import React from "react"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
-import MenuIcon from "@material-ui/icons/Menu"
 import { AppConsumer } from "../utils/context"
 import Aside from "./aside"
-import { useCart } from '../utils/cartContext';
+import { useCart } from "../utils/cartContext"
 
 const Structure = props => {
-
   const isCartPage =
     typeof window !== "undefined" && location.pathname.includes("cart")
   const [cart] = useCart()
@@ -15,10 +12,13 @@ const Structure = props => {
   return (
     <AppConsumer>
       {context => {
-        console.log(context.langsMenu)
         return (
           <div className={`page-wrap ${props.pageclass}`}>
-            <Aside langsMenu={context.langsMenu} locale={context.locale} aside={context.aside} />
+            <Aside
+              langsMenu={context.langsMenu}
+              locale={context.locale}
+              aside={context.aside}
+            />
             <main className="main">{props.children}</main>
             {!isCartPage && cart && cart.length > 0 && (
               <AniLink

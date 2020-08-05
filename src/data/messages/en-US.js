@@ -9,6 +9,8 @@ module.exports = {
   filterFrom: "from",
   authorName: "Viktor",
   authorSurame: "Vynogradov",
+  authorFullname: "Viktor Vynogradov",
+  seoDescr: "Viktor Vynogradov is an outstanding Ukrainian artist and writer",
   btnAddCart: "Buy it",
   btnRemoveFromCart: "Remove from cart",
   btnReserCart: "Clear all",

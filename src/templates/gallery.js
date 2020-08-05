@@ -1,12 +1,13 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { FormattedMessage, injectIntl } from "react-intl"
+import Helmet from "react-helmet"
 import { AppConsumer } from "../utils/context"
 import Grid from "@material-ui/core/Grid"
 import chunk from "lodash/chunk"
 import filter from "lodash/filter"
 import Structure from "../components/structure"
 import Paint from "../components/paint"
-import { FormattedMessage } from "react-intl"
 
 // This would normally be in a Redux store or some other global data store.
 if (typeof window !== `undefined`) {
@@ -14,8 +15,8 @@ if (typeof window !== `undefined`) {
 }
 
 class GalleryPage extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     let postsToShow = 4
     if (typeof window !== `undefined`) {
       postsToShow = window.postsToShow
@@ -85,6 +86,15 @@ class GalleryPage extends React.Component {
         {context => {
           return (
             <Structure pageclass="page-gallery">
+              <Helmet
+                title={this.props.intl.formatMessage({ id: "authorFullname" })}
+                meta={[
+                  {
+                    name: "description",
+                    content: this.props.intl.formatMessage({ id: "seoDescr" }),
+                  },
+                ]}
+              />
               <div className="container">
                 <div className="filter">
                   <ul className="filter__list">
@@ -152,7 +162,7 @@ class GalleryPage extends React.Component {
   }
 }
 
-export default GalleryPage
+export default injectIntl(GalleryPage)
 
 export const pageQuery = graphql`
   query PageGalleryQuery($lang: String!) {

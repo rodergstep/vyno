@@ -1,13 +1,15 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { TweenLite, TimelineLite, Power1 } from "gsap"
+import { TimelineLite, Power1 } from "gsap"
+import { injectIntl } from "react-intl"
+import Helmet from "react-helmet"
 import { AppConsumer } from "../utils/context"
 import Img from "gatsby-image"
 import Structure from "../components/structure"
 
 class HomePage extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       pageclass: "page-home",
@@ -47,6 +49,15 @@ class HomePage extends React.Component {
           // context.handleLoaderShow(true)
           return (
             <Structure pageclass="page-home">
+              <Helmet
+              title={this.props.intl.formatMessage({id: 'authorFullname'})}
+              meta={[
+                {
+                  name: "description",
+                  content: this.props.intl.formatMessage({ id: "seoDescr" }),
+                },
+              ]}
+              />
               <div
                 className="hero-paint"
                 ref={n => (this.transitionHeroPaint = n)}
@@ -72,7 +83,7 @@ class HomePage extends React.Component {
   }
 }
 
-export default HomePage
+export default injectIntl(HomePage)
 
 export const pageQuery = graphql`
   query PageHomeQuery($lang: String!) {

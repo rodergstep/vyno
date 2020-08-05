@@ -1,17 +1,28 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { injectIntl } from "react-intl"
+import Helmet from "react-helmet"
 import Grid from "@material-ui/core/Grid"
 import Structure from "../components/structure"
 
 class PoetryPage extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
   }
 
   render() {
     let poetryEdges = this.props.data.poetry.edges
     return (
       <Structure>
+                      <Helmet
+              title={this.props.intl.formatMessage({id: 'authorFullname'})}
+              meta={[
+                {
+                  name: "description",
+                  content: this.props.intl.formatMessage({ id: "seoDescr" }),
+                },
+              ]}
+              />
         <div className="container">
           {poetryEdges.map((node, i) => {
             const { title, poems } = node.node
@@ -37,7 +48,7 @@ class PoetryPage extends React.Component {
   }
 }
 
-export default PoetryPage
+export default injectIntl(PoetryPage)
 
 export const pageQuery = graphql`
   query PagePoetryQuery($lang: String!) {

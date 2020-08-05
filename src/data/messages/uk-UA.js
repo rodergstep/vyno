@@ -9,6 +9,8 @@ module.exports = {
   filterFrom: "з",
   authorName: "Віктор",
   authorSurame: "Виноградов",
+  authorFullname: "Віктор Виноградов",
+  seoDescr: "Віктор Виноградов - видатний український художник і поет",
   btnAddCart: "Придбати",
   btnRemoveFromCart: "Видалити з кошика",
   btnReserCart: "Очистити",
