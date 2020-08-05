@@ -7,7 +7,7 @@ const SelectLanguage = props => {
     <div className="swith-language">
       {props.langs.map((lang, i) => (
         <AniLink
-          to={`/${lang.langKey}`}
+          to={`/${lang.link}`}
           key={lang.langKey}
           className={lang.selected ? "selected" : ""}
         >

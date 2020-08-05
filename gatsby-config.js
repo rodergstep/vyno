@@ -49,8 +49,8 @@ module.exports = {
         name: `Viktor Vynogradov`,
         short_name: `Vynogradov`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#000`,
+        theme_color: `#fff`,
         display: `minimal-ui`,
         icon: `src/images/wine-icon.svg`, // This path is relative to the root of the site.
       },
