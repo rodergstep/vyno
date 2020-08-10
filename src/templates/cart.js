@@ -97,6 +97,10 @@ const CartPage = props => {
             name: "description",
             content: intl.formatMessage({ id: "seoDescr" }),
           },
+          {
+            name: "google-site-verification",
+            content: "v8S_whAsK0Yp1f88Y5zMfcetW_koWN6hxM541_5zve8",
+          },
         ]}
       />
       <div className="container">

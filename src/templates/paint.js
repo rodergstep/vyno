@@ -8,7 +8,7 @@ import Helmet from "react-helmet"
 import ChevronLeftRoundedIcon from "@material-ui/icons/ChevronLeftRounded"
 import Structure from "../components/structure"
 import { AppConsumer } from "../utils/context"
-import { useCart } from '../utils/cartContext';
+import { useCart } from "../utils/cartContext"
 
 const PaintTemplate = props => {
   const intl = useIntl()
@@ -24,32 +24,42 @@ const PaintTemplate = props => {
     method,
     price,
   } = paint
-  paint.url = (typeof window !== 'undefined') && location.pathname
+  paint.url = typeof window !== "undefined" && location.pathname
 
-  const [cart, cartApi] = useCart();
+  const [cart, cartApi] = useCart()
   return (
     <Structure>
       <AppConsumer>
         {context => {
           console.log(cart)
-          const isAddedToCart = cart && Array.isArray(cart) && cart.some(
-            el => el.contentful_id === contentful_id
-            )
-            const handlePaintBuy = () => {
-              if (isAddedToCart) {
-                cartApi(paint, 'DELETE')
-              } else {
-                cartApi(paint, 'ADD')
-              }
+          const isAddedToCart =
+            cart &&
+            Array.isArray(cart) &&
+            cart.some(el => el.contentful_id === contentful_id)
+          const handlePaintBuy = () => {
+            if (isAddedToCart) {
+              cartApi(paint, "DELETE")
+            } else {
+              cartApi(paint, "ADD")
+            }
           }
           return (
             <div className="container">
-            <Helmet
-              title={`${title} | ${intl.formatMessage({ id: "authorFullname" })}`}
-              meta={[
-                { name: "description", content: intl.formatMessage({ id: "seoDescr" }) }
-              ]}
-            />
+              <Helmet
+                title={`${title} | ${intl.formatMessage({
+                  id: "authorFullname",
+                })}`}
+                meta={[
+                  {
+                    name: "description",
+                    content: intl.formatMessage({ id: "seoDescr" }),
+                  },
+                  {
+                    name: "google-site-verification",
+                    content: "v8S_whAsK0Yp1f88Y5zMfcetW_koWN6hxM541_5zve8",
+                  },
+                ]}
+              />
               <Grid container spacing={3}>
                 <Grid item xs={12} lg={8}>
                   <div className="figure">

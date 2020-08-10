@@ -14,15 +14,19 @@ class PoetryPage extends React.Component {
     let poetryEdges = this.props.data.poetry.edges
     return (
       <Structure>
-                      <Helmet
-              title={this.props.intl.formatMessage({id: 'authorFullname'})}
-              meta={[
-                {
-                  name: "description",
-                  content: this.props.intl.formatMessage({ id: "seoDescr" }),
-                },
-              ]}
-              />
+        <Helmet
+          title={this.props.intl.formatMessage({ id: "authorFullname" })}
+          meta={[
+            {
+              name: "description",
+              content: this.props.intl.formatMessage({ id: "seoDescr" }),
+            },
+            {
+              name: "google-site-verification",
+              content: "v8S_whAsK0Yp1f88Y5zMfcetW_koWN6hxM541_5zve8",
+            },
+          ]}
+        />
         <div className="container">
           {poetryEdges.map((node, i) => {
             const { title, poems } = node.node

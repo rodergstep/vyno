@@ -6,6 +6,7 @@ module.exports = {
   siteMetadata: {
     title: `Vynogradov Victor`,
     description: `Vynogradov Victor - the famous artist in the world`,
+    siteUrl: `https://www.vynogradov.com.ua`,
     author: `@rodergstep`,
     languages,
   },
@@ -14,6 +15,7 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-advanced-sitemap`,
     `gatsby-plugin-sass`,
     {
       resolve: "gatsby-plugin-i18n",
