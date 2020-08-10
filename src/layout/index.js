@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { StaticQuery, graphql } from "gatsby"
-import Helmet from "react-helmet"
 import { getCurrentLangKey, getLangs, getUrlForLang } from "ptz-i18n"
 import { IntlProvider } from "react-intl"
 import "intl"
