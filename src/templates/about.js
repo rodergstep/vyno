@@ -5,10 +5,27 @@ import Grid from "@material-ui/core/Grid"
 import { injectIntl } from "react-intl"
 import Helmet from "react-helmet"
 import Structure from "../components/structure"
+import Image from "../components/image"
 
 class AboutPage extends React.Component {
   constructor(props) {
     super(props)
+    this.imgPathArr = [
+      "artistic_ukraine.jpg",
+      "fabiano_2017_page_570.jpg",
+      "fabiano_2017.jpg",
+      "fabiano_2020_cert.jpg",
+      "fabiano_2020.jpg",
+      "gallery_k.jpg",
+      "kyiv_catalog.jpg",
+      "vynogradov_dyplom.jpg",
+      "sea_aquarelle.jpg",
+      "certificate_more_aquarely_2018.jpg",
+      "yalta_catalog_obklad.jpg",
+      "yalta_catalog_tytul.jpg",
+      "yalta_catalog_work1.jpg",
+      "certificate_fabiano_2017.jpg",
+    ]
   }
 
   render() {
@@ -32,28 +49,47 @@ class AboutPage extends React.Component {
           {aboutEdges.map((node, i) => {
             const { title, image, contentful_id, description } = node.node
             return (
-              <Grid key={i} container spacing={3}>
-                <Grid item xs={12} lg={6}>
-                  {image && (
-                    <Img
-                      fluid={[{ ...image.fluid }]}
-                      className="about__person"
-                      fadeIn
-                    />
-                  )}
+              <div>
+                <Grid key={i} container spacing={3}>
+                  <Grid item xs={12} lg={6}>
+                    {image && (
+                      <Img
+                        fluid={[{ ...image.fluid }]}
+                        className="about__person"
+                        fadeIn
+                      />
+                    )}
+                  </Grid>
+                  <Grid item xs={12} lg={6}>
+                    <h1 className="paint__title">{title}</h1>
+                    {description && (
+                      <div
+                        className="paint__descr"
+                        dangerouslySetInnerHTML={{
+                          __html: description.childMarkdownRemark.html,
+                        }}
+                      />
+                    )}
+                  </Grid>
                 </Grid>
-                <Grid item xs={12} lg={6}>
-                  <h1 className="paint__title">{title}</h1>
-                  {description && (
-                    <div
-                      className="paint__descr"
-                      dangerouslySetInnerHTML={{
-                        __html: description.childMarkdownRemark.html,
-                      }}
-                    />
-                  )}
-                </Grid>
-              </Grid>
+                <div className="about__dyplomas">
+                  <h3 className="paint__title">Дипломи</h3>
+                  <Grid key={i} container spacing={3}>
+                    {this.imgPathArr.map(
+                      imgName =>
+                        imgName && (
+                          <Grid item xs={12} lg={6}>
+                            <Image
+                              key={imgName}
+                              fileName={`dyplomy/${imgName}`}
+                              className="about__dyplom"
+                            />
+                          </Grid>
+                        )
+                    )}
+                  </Grid>
+                </div>
+              </div>
             )
           })}
         </div>

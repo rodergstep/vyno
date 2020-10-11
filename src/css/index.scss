@@ -215,6 +215,15 @@ button:disabled {
 .about__person {
   max-height: calc(100vh - 60px);
 }
+.about__dyplomas {
+  margin-top: 56px;
+  .paint__title {
+    text-align-last: center;
+  }
+}
+.about__dyplom {
+  border: 1px solid #eee;
+}
 
 // Overlay
 .overlay {
