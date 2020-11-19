@@ -58,15 +58,17 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      resolve: `gatsby-plugin-webfonts`,
       options: {
-        fonts: [
-          {
-            family: `Assistant`,
-            variants: [`300`, `400`, `700`],
-            subsets: [`latin`, `cyrillic`],
-          },
-        ],
+        fonts: {
+          google: [
+            {
+              family: `Assistant`,
+              variants: [`300`, `400`, `700`],
+              subsets: [`latin`, `cyrillic`],
+            },
+          ],
+        },
       },
     },
     {
