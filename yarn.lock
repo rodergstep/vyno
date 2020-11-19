@@ -1031,15 +1031,14 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@contentful/axios@^0.18.0":
-  version "0.18.0"
-  resolved "https://registry.yarnpkg.com/@contentful/axios/-/axios-0.18.0.tgz#576e0e6047411a66971e82d40688a8c795e62f27"
-  integrity sha512-4r4Ww1IJlmRolKgovLTTmdS6CsdvXYVxgXRFwWSh1x36T/0Wg9kTwdaVaApZXcv1DfYyw9RSNdxIGSwTP2/Lag==
+"@contentful/rich-text-react-renderer@^14.1.1":
+  version "14.1.2"
+  resolved "https://registry.yarnpkg.com/@contentful/rich-text-react-renderer/-/rich-text-react-renderer-14.1.2.tgz#b7fff19faa0512f034f1717774a0d9b348bb07fc"
+  integrity sha512-UmZ5nNvFXuD4LA2TKDDD52FgzmeMAQUVu5p9UqKDVDG6twHAD4DiWtoXSRM5Bebftlx2UH+UeWHbxIOgF/lV5A==
   dependencies:
-    follow-redirects "^1.2.5"
-    is-buffer "^1.1.5"
+    "@contentful/rich-text-types" "^14.1.2"
 
-"@contentful/rich-text-types@^14.1.1":
+"@contentful/rich-text-types@^14.1.1", "@contentful/rich-text-types@^14.1.2":
   version "14.1.2"
   resolved "https://registry.yarnpkg.com/@contentful/rich-text-types/-/rich-text-types-14.1.2.tgz#33162fdbf427891122a96030f806ca9a9cf0e844"
   integrity sha512-XbgZ7op5uyYYszipgQg/bYobF4b+llXyTwS8hISRniQY9xKESz544eP2OGmRc4J3MHx29M7Vmx7TVA/IK65giQ==
@@ -2723,6 +2722,13 @@ axios@^0.20.0:
   dependencies:
     follow-redirects "^1.10.0"
 
+axios@^0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.0.tgz#26df088803a2350dff2c27f96fef99fe49442aca"
+  integrity sha512-fmkJBknJKoZwem3/IKSSLpkdNXZeBu5Q7GA/aRsr2btgrptmSCxi2oFjZHqGdK9DoTil9PIHlPIZw2EcRJXRvw==
+  dependencies:
+    follow-redirects "^1.10.0"
+
 axobject-query@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/axobject-query/-/axobject-query-2.2.0.tgz#943d47e10c0b704aa42275e20edf3722648989be"
@@ -4064,14 +4070,14 @@ contentful-management@^5.26.3:
     lodash "^4.17.11"
     type-fest "0.15.1"
 
-contentful-resolve-response@^1.1.4:
+contentful-resolve-response@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/contentful-resolve-response/-/contentful-resolve-response-1.2.2.tgz#3f83a5f4742854de740e250a11020b4fb646da91"
   integrity sha512-KyRz05f2YFJDSFs/L5jtsptbL5Fk3+ukSjRF94zFXq0FOtYoaxyCbqKgHhK2+3hlipxVQ+KGRus/tSaD6PoPMg==
   dependencies:
     lodash "^4.17.15"
 
-contentful-sdk-core@^6.0.0-beta0, contentful-sdk-core@^6.4.0:
+contentful-sdk-core@^6.4.0, contentful-sdk-core@^6.4.5:
   version "6.4.6"
   resolved "https://registry.yarnpkg.com/contentful-sdk-core/-/contentful-sdk-core-6.4.6.tgz#a94b1355afd292dfddb0cdc16b565980f9a03c47"
   integrity sha512-6KVLeCdn1akqjGvVMUgMxQ3B+zNIYeq3MUlqWsSLLJozr++0ZYWU76XmHf4n5MPTMoX9RGbRSR8hJAaKcUNDFw==
@@ -4079,16 +4085,16 @@ contentful-sdk-core@^6.0.0-beta0, contentful-sdk-core@^6.4.0:
     lodash "^4.17.10"
     qs "^6.5.2"
 
-contentful@6.1.0, contentful@^7.14.7:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/contentful/-/contentful-6.1.0.tgz#c8f6761a7180cfe66ef54391cf07b8f864549c0c"
-  integrity sha512-jAFw4Vk9ucOxbUIu9ZWIAwluMcK307YTDQnnhS+vCYOM4wMfmUsPhebX+c+bKGNunxiWjk6/4+RuODVwl/eJWA==
+contentful@7.14.13, contentful@^7.14.8:
+  version "7.14.13"
+  resolved "https://registry.yarnpkg.com/contentful/-/contentful-7.14.13.tgz#07d301fabc9f30d2a1297030d4de3f29ad239133"
+  integrity sha512-jzvTrPztxSVE3Vzi6wVu/ovkeV0Sfbs44K89rDJVoMSQei5mR7c3sPl/zkFw8tGYZwcDtBRM5z3GuPaA/jN4/g==
   dependencies:
-    "@contentful/axios" "^0.18.0"
-    contentful-resolve-response "^1.1.4"
-    contentful-sdk-core "^6.0.0-beta0"
+    axios "^0.20.0"
+    contentful-resolve-response "^1.2.2"
+    contentful-sdk-core "^6.4.5"
     json-stringify-safe "^5.0.1"
-    lodash "^4.17.5"
+    lodash "^4.17.11"
 
 convert-css-length@^1.0.1:
   version "1.0.2"
@@ -6231,7 +6237,7 @@ follow-redirects@1.5.10:
   dependencies:
     debug "=3.1.0"
 
-follow-redirects@^1.0.0, follow-redirects@^1.10.0, follow-redirects@^1.2.5:
+follow-redirects@^1.0.0, follow-redirects@^1.10.0:
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.0.tgz#b42e8d93a2a7eea5ed88633676d6597bc8e384db"
   integrity sha512-aq6gF1BEKje4a9i9+5jimNFIpq4Q1WiwBToeRK5NvZBd/TRsmW8BsJfOEGkr76TbOyPVD3OVDN910EcUNtRYEA==
@@ -6438,7 +6444,7 @@ gatsby-cli@^2.13.1:
     yoga-layout-prebuilt "^1.9.6"
     yurnalist "^1.1.2"
 
-gatsby-core-utils@^1.3.23, gatsby-core-utils@^1.4.0:
+gatsby-core-utils@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-1.4.0.tgz#d42234b8a15b34237921522f9ae303a2bb833c78"
   integrity sha512-wU6huyGZ8aJ/8Izfc7D39ujxaCz/jFtznufmMSXLnEBwLF5MWGsmECx4i2nfTb2kkkTFc+n0i/rx///UnPUURg==
@@ -6636,13 +6642,6 @@ gatsby-plugin-typography@^2.2.20:
   dependencies:
     "@babel/runtime" "^7.11.2"
 
-gatsby-plugin-utils@^0.2.35:
-  version "0.2.40"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-utils/-/gatsby-plugin-utils-0.2.40.tgz#20e997d10efb9a0368270f79ce2e6001346f6336"
-  integrity sha512-RKjmpPhmi8TDR9hAKxmD4ZJMje3BLs6nt6mxMWT0F8gf5giCYEywplJikyCvaPfuyaFlq1hMmFaVvzmeZNussg==
-  dependencies:
-    joi "^17.2.1"
-
 gatsby-plugin-utils@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-utils/-/gatsby-plugin-utils-0.3.0.tgz#1d10d3c6423603c391d31bcd12bd683bf40d7037"
@@ -6733,31 +6732,32 @@ gatsby-recipes@^0.3.1:
     xstate "^4.9.1"
     yoga-layout-prebuilt "^1.9.6"
 
-gatsby-source-contentful@^2.1.73:
-  version "2.3.56"
-  resolved "https://registry.yarnpkg.com/gatsby-source-contentful/-/gatsby-source-contentful-2.3.56.tgz#17b2b3af84ff06a61b1dde37f7fe9da3def9a7a9"
-  integrity sha512-E2t0U9p5vg/qgdEQodTzIFDlOohjMg+uzmQEhA4ZB6/jahkdOwYEHxYsXVF0/UQmDVKx016wYY3ECMLo1nodvQ==
+gatsby-source-contentful@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/gatsby-source-contentful/-/gatsby-source-contentful-4.0.0.tgz#1070320362536e4e23fd7f1cc49f52859fbf9412"
+  integrity sha512-20wD1G00HbHJJK/PovQSaWu8eXcMvgp0wUOCTbk4hxvCPptnmTpxnihg0BeseJj142snCcWsnMVOuyxPXxIaYg==
   dependencies:
     "@babel/runtime" "^7.11.2"
+    "@contentful/rich-text-react-renderer" "^14.1.1"
     "@contentful/rich-text-types" "^14.1.1"
     "@hapi/joi" "^15.1.1"
-    axios "^0.20.0"
+    axios "^0.21.0"
     base64-img "^1.0.4"
     bluebird "^3.7.2"
     chalk "^4.1.0"
-    contentful "^7.14.7"
+    contentful "^7.14.8"
     fs-extra "^9.0.1"
-    gatsby-core-utils "^1.3.23"
-    gatsby-plugin-utils "^0.2.35"
-    gatsby-source-filesystem "^2.3.35"
-    is-online "^8.5.0"
+    gatsby-core-utils "^1.4.0"
+    gatsby-plugin-utils "^0.3.0"
+    gatsby-source-filesystem "^2.5.0"
+    is-online "^8.5.1"
     json-stringify-safe "^5.0.1"
     lodash "^4.17.20"
     node-fetch "^2.6.1"
     progress "^2.0.3"
     qs "^6.9.4"
 
-gatsby-source-filesystem@^2.1.43, gatsby-source-filesystem@^2.3.35:
+gatsby-source-filesystem@^2.1.43, gatsby-source-filesystem@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.5.0.tgz#589ced0e748b219e60908e07b46240f70b5aa96f"
   integrity sha512-wDTcAqhhgf8ElotfOHU0d0itX1ir1GSoge/PCH/X6b/cEFLxLCgcqUVPHr1/opdRqzoQN/PGO/xVHeK3myQB+Q==
@@ -8530,7 +8530,7 @@ is-object@^1.0.1:
   resolved "https://registry.yarnpkg.com/is-object/-/is-object-1.0.1.tgz#8952688c5ec2ffd6b03ecc85e769e02903083470"
   integrity sha1-iVJojF7C/9awPsyF52ngKQMINHA=
 
-is-online@^8.5.0:
+is-online@^8.5.1:
   version "8.5.1"
   resolved "https://registry.yarnpkg.com/is-online/-/is-online-8.5.1.tgz#bcc6970c6a3fad552a41738c0f0d0737b0ce6e63"
   integrity sha512-RKyTQx/rJqw2QOXHwy7TmXdlkpe0Hhj7GBsr6TQJaj4ebNOfameZCMspU5vYbwBBzJ2brWArdSvNVox6T6oCTQ==
