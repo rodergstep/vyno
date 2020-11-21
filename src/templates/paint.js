@@ -1,7 +1,6 @@
 import React from "react"
 import Grid from "@material-ui/core/Grid"
-import { graphql } from "gatsby"
-import AniLink from "gatsby-plugin-transition-link/AniLink"
+import { graphql, Link } from "gatsby"
 import Img from "gatsby-image"
 import { FormattedMessage, useIntl } from "react-intl"
 import Helmet from "react-helmet"
@@ -67,14 +66,13 @@ const PaintTemplate = props => {
                   </div>
                 </Grid>
                 <Grid item xs={12} lg={4}>
-                  <AniLink
-                    fade
+                  <Link
                     to={`/${context.locale}/gallery`}
                     className="backlink d-flex align-center"
                   >
                     <ChevronLeftRoundedIcon />
                     <FormattedMessage id="backlink" />
-                  </AniLink>
+                  </Link>
                   <h1 className="paint__title">{title}</h1>
                   <div className="paint__info">
                     {size && (

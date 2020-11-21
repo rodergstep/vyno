@@ -1,14 +1,13 @@
 import React, { useState } from "react"
 import ReactDOMServer from "react-dom/server"
 import emailjs from "emailjs-com"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import Img from "gatsby-image"
 import Grid from "@material-ui/core/Grid"
 import { FormattedMessage, useIntl } from "react-intl"
 import Helmet from "react-helmet"
 import Structure from "../components/structure"
 import OrderForm from "../components/forms/orderForm"
-import AniLink from "gatsby-plugin-transition-link/AniLink"
 import { useCart } from "../utils/cartContext"
 
 const CartPage = props => {
@@ -128,8 +127,7 @@ const CartPage = props => {
                             cart.map((item, i) => (
                               <tr key={item.id}>
                                 <td>
-                                  <AniLink
-                                    fade
+                                  <Link
                                     to={item.url}
                                     className="cart__item-link"
                                   >
@@ -142,7 +140,7 @@ const CartPage = props => {
                                       )}
                                     </div>
                                     {item.title}
-                                  </AniLink>
+                                  </Link>
                                 </td>
                                 <td>${item.price}</td>
                               </tr>

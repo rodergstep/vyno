@@ -1,7 +1,6 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import Img from "gatsby-image"
-import AniLink from "gatsby-plugin-transition-link/AniLink"
 
 class Paint extends React.Component {
   constructor() {
@@ -14,14 +13,14 @@ class Paint extends React.Component {
   render() {
     const { image, title, slug, node_locale } = this.props.post
     return (
-      <AniLink fade to={`/${node_locale}/paints/${slug}/`}>
+      <Link to={`/${node_locale}/paints/${slug}/`}>
         <figure className="figure">
           {image && (
             <Img fluid={[{ ...image.fluid }]} fadeIn className="figure__pic" />
           )}
           <figcaption className="figure__title">{title}</figcaption>
         </figure>
-      </AniLink>
+      </Link>
     )
   }
 }

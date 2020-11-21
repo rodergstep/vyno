@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import Img from "gatsby-image"
-import AniLink from "gatsby-plugin-transition-link/AniLink"
 import MenuIcon from "@material-ui/icons/Menu"
 import CloseIcon from "@material-ui/icons/Close"
 import SelectLanguage from "./selectLanguage"
+import { Link } from "gatsby"
 
 const Aside = ({ langsMenu, locale, aside }) => {
   const [asideClassName, toggleAside] = useState(false)
@@ -24,9 +24,9 @@ const Aside = ({ langsMenu, locale, aside }) => {
   return (
     <aside className={`aside ${asideClassName ? "is-open" : ""}`}>
       <div className="topbar">
-        <AniLink fade to={`/${locale}/`} className="topbar__logoname">
+        <Link to={`/${locale}/`} className="topbar__logoname">
           <h2>{aside && aside.author_name}</h2>
-        </AniLink>
+        </Link>
         <button
           className="btn transparent btn--nav-toggler"
           onClick={() => toggleAside(!asideClassName)}
@@ -41,7 +41,7 @@ const Aside = ({ langsMenu, locale, aside }) => {
         >
           <CloseIcon />
         </button>
-        <AniLink fade to={`/${locale}/`} className="aside__header">
+        <Link to={`/${locale}/`} className="aside__header">
           <figure>
             {aside && aside.avatar && (
               <Img
@@ -54,15 +54,15 @@ const Aside = ({ langsMenu, locale, aside }) => {
           <figcaption className="author">
             {aside && aside.author_name}
           </figcaption>
-        </AniLink>
+        </Link>
 
         <div className="nav">
           <ul className="nav__list">
             {menu.map((item, index) => (
               <li key={item.text}>
-                <AniLink fade to={item.link} className="nav__link">
+                <Link to={item.link} className="nav__link">
                   {item.text}
-                </AniLink>
+                </Link>
               </li>
             ))}
           </ul>

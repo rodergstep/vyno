@@ -1,8 +1,8 @@
 import React from "react"
-import AniLink from "gatsby-plugin-transition-link/AniLink"
 import { AppConsumer } from "../utils/context"
 import Aside from "./aside"
 import { useCart } from "../utils/cartContext"
+import { Link } from "gatsby"
 
 const Structure = props => {
   const isCartPage =
@@ -21,11 +21,7 @@ const Structure = props => {
             />
             <main className="main">{props.children}</main>
             {!isCartPage && cart && cart.length > 0 && (
-              <AniLink
-                fade
-                to={`/${context.locale}/cart`}
-                className="cart-sticked"
-              >
+              <Link to={`/${context.locale}/cart`} className="cart-sticked">
                 <svg
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +76,7 @@ const Structure = props => {
                   </g>
                 </svg>
                 <span className="cart-sticked__pieces">{cart.length}</span>
-              </AniLink>
+              </Link>
             )}
           </div>
         )

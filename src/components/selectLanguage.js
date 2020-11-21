@@ -1,13 +1,13 @@
 import React from "react"
 import PropTypes from "prop-types"
-import AniLink from "gatsby-plugin-transition-link/AniLink"
+import { Link } from "gatsby"
 
 const SelectLanguage = props => {
   return (
     <div className="swith-language">
       {props.langs.map((lang, i) => (
-        <AniLink
-          to={`/${lang.link}`}
+        <Link
+          to={`${lang.link}`}
           key={lang.langKey}
           className={lang.selected ? "selected" : ""}
         >
@@ -17,7 +17,7 @@ const SelectLanguage = props => {
             ? "eng"
             : lang.langKey}
           {i !== props.langs.length - 1 ? <span>/</span> : null}
-        </AniLink>
+        </Link>
       ))}
     </div>
   )
