@@ -47,7 +47,13 @@ class AboutPage extends React.Component {
         />
         <div className="container">
           {aboutEdges.map((node, i) => {
-            const { title, image, contentful_id, description } = node.node
+            const {
+              title,
+              image,
+              contentful_id,
+              description,
+              exhibitions,
+            } = node.node
             return (
               <div>
                 <Grid key={i} container spacing={3}>
@@ -57,6 +63,7 @@ class AboutPage extends React.Component {
                         fluid={[{ ...image.fluid }]}
                         className="about__person"
                         fadeIn
+                        style={{ maxHeight: "80vh" }}
                       />
                     )}
                   </Grid>
@@ -73,7 +80,12 @@ class AboutPage extends React.Component {
                   </Grid>
                 </Grid>
                 <div className="about__dyplomas">
-                  <h3 className="paint__title">Дипломи</h3>
+                  <h3
+                    className="paint__title"
+                    dangerouslySetInnerHTML={{
+                      __html: exhibitions.childMarkdownRemark.html,
+                    }}
+                  />
                   <Grid key={i} container spacing={3}>
                     {this.imgPathArr.map(
                       imgName =>
@@ -115,6 +127,11 @@ export const pageQuery = graphql`
             }
           }
           description {
+            childMarkdownRemark {
+              html
+            }
+          }
+          exhibitions {
             childMarkdownRemark {
               html
             }
