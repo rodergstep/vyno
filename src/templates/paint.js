@@ -51,7 +51,7 @@ const PaintTemplate = props => {
                 meta={[
                   {
                     name: "description",
-                    content: intl.formatMessage({ id: "seoDescr" }),
+                    content: intl.formatMessage({ id: "seoDescr2" }),
                   },
                   {
                     name: "google-site-verification",

@@ -11,6 +11,7 @@ module.exports = {
   authorSurame: "Виноградов",
   authorFullname: "Віктор Виноградов",
   seoDescr: "Віктор Виноградов - видатний український художник і поет",
+  seoDescr2: "Купити картину Виноградова",
   btnAddCart: "Придбати",
   btnRemoveFromCart: "Видалити з кошика",
   btnReserCart: "Очистити",

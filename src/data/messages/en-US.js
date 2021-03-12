@@ -11,6 +11,7 @@ module.exports = {
   authorSurame: "Vynogradov",
   authorFullname: "Viktor Vynogradov",
   seoDescr: "Viktor Vynogradov is an outstanding Ukrainian artist and writer",
+  seoDescr2: "Buy picture of Vinogradov",
   btnAddCart: "Buy it",
   btnRemoveFromCart: "Remove from cart",
   btnReserCart: "Clear all",
