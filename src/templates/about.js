@@ -25,6 +25,9 @@ class AboutPage extends React.Component {
       "yalta_catalog_tytul.jpg",
       "yalta_catalog_work1.jpg",
       "certificate_fabiano_2017.jpg",
+      "katalog_mini_page.jpg",
+      'miniwatercolor_2020_0.jpg',
+      'miniwatercolor_2020_1.jpg',
     ]
   }
 
