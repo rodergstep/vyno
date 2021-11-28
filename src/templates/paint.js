@@ -91,7 +91,7 @@ const PaintTemplate = props => {
                       </span>
                     )}
                   </div>
-                  {price && (
+                  {/* {price && (
                     <div className="paint__price">
                       <span className="mr-2">${price}</span>
                       <button className="btn primary" onClick={handlePaintBuy}>
@@ -102,7 +102,7 @@ const PaintTemplate = props => {
                         )}
                       </button>
                     </div>
-                  )}
+                  )} */}
                   {description && (
                     <div
                       className="paint__descr"

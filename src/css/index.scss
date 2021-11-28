@@ -194,21 +194,21 @@ button:disabled {
 .paint__descr {
   margin-top: 16px;
 }
-.paint__price {
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  margin-top: 16px;
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 32px;
-    text-shadow: none;
-    box-shadow: none;
-    font-size: 14px;
-  }
-}
+// .paint__price {
+//   display: flex;
+//   align-items: center;
+//   font-size: 16px;
+//   margin-top: 16px;
+//   .btn {
+//     display: inline-flex;
+//     align-items: center;
+//     justify-content: center;
+//     height: 32px;
+//     text-shadow: none;
+//     box-shadow: none;
+//     font-size: 14px;
+//   }
+// }
 .nav__socials {
   display: flex;
 }
@@ -436,11 +436,11 @@ button:disabled {
   right: 20px;
   z-index: 1;
 }
-.cart-sticked__icon {
-  width: 1em;
-  height: 1em;
-  font-size: 48px;
-}
+// .cart-sticked__icon {
+//   width: 1em;
+//   height: 1em;
+//   font-size: 48px;
+// }
 .cart-sticked__pieces {
   display: inline-flex;
   align-items: center;

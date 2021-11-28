@@ -20,7 +20,7 @@ const Structure = props => {
               aside={context.aside}
             />
             <main className="main">{props.children}</main>
-            {!isCartPage && cart && cart.length > 0 && (
+            {/* {!isCartPage && cart && cart.length > 0 && (
               <Link to={`/${context.locale}/cart`} className="cart-sticked">
                 <svg
                   version="1.1"
@@ -77,7 +77,7 @@ const Structure = props => {
                 </svg>
                 <span className="cart-sticked__pieces">{cart.length}</span>
               </Link>
-            )}
+            )} */}
           </div>
         )
       }}

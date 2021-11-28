@@ -26,8 +26,16 @@ class AboutPage extends React.Component {
       "yalta_catalog_work1.jpg",
       "certificate_fabiano_2017.jpg",
       "katalog_mini_page.jpg",
-      'miniwatercolor_2020_0.jpg',
-      'miniwatercolor_2020_1.jpg',
+      "miniwatercolor_2020_0.jpg",
+      "miniwatercolor_2020_1.jpg",
+      "dnipro_2017.jpg",
+      "miniwatercolor_2018_0.jpg",
+      "miniwatercolor_2018_1.jpg",
+      "miniwatercolor_2019_0.jpg",
+      "miniwatercolor_2019_1.jpg",
+      "miniwatercolor_2020_2.jpg",
+      "our_wonderful_world_2018.jpg",
+      "the_world_of_watercolor_2017.jpg",
     ]
   }
 
